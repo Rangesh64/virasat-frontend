@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virasat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        canvas: '#EAE3D2',
+                        shell: '#FAF7F2',
+                        oat: '#F2ECE1',
+                        ink: '#1C1B19',
+                        sub: '#78736A',
+                        terra: '#E06D3B'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-canvas text-ink font-sans antialiased selection:bg-terra selection:text-white min-h-screen flex flex-col justify-between">
+
+    <header class="w-full max-w-6xl mx-auto px-4 sm:px-8 pt-4 sm:pt-7 pb-2 flex justify-between items-center">
+        <a href="index.html" class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-full bg-ink text-shell flex items-center justify-center font-bold text-sm tracking-wider">
+                V
+            </div>
+            <span class="font-bold text-xl tracking-tight text-ink">Virasat</span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-sub">
+            <a href="../ai-tour-guide/index.html" class="hover:text-ink transition">Audio Guide</a>
+            <a href="../ai-tour-planner/index.html" class="hover:text-ink transition">Trip Planner</a>
+            <a href="../dashboard/index.html" class="hover:text-ink transition">Destinations</a>
+        </nav>
+
+        <div class="flex items-center gap-2 sm:gap-4">
+            <a href="../dashboard/index.html" class="text-xs sm:text-sm font-semibold text-sub hover:text-ink px-3 py-2 transition">
+                Explore as Guest
+            </a>
+            <button id="openAuthBtn" class="bg-ink text-shell text-xs sm:text-sm font-semibold px-5 py-2.5 rounded-full hover:opacity-90 transition">
+    Sign In
+</button>
+        </div>
+    </header>
+
+    <main class="w-full max-w-6xl mx-auto px-4 sm:px-8 py-4 sm:py-8 my-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+            <div class="lg:col-span-7 bg-shell rounded-[36px] p-5 sm:p-9 shadow-soft border border-white/60">
+                
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="Traveler" class="w-11 h-11 rounded-full object-cover border-2 border-oat">
+                        <div>
+                            <p class="text-xs text-sub font-medium">Namaste, Traveler</p>
+                            <p class="text-sm font-bold text-ink">Where are we walking today?</p>
+                        </div>
+                    </div>
+                    <button id="gridMenuBtn" class="w-11 h-11 rounded-full bg-oat flex items-center justify-center hover:bg-canvas transition">
+                        <svg class="w-5 h-5 text-ink" fill="currentColor" viewBox="0 0 24 24">
+                            <circle cx="7" cy="7" r="2.2"/>
+                            <circle cx="17" cy="7" r="2.2"/>
+                            <circle cx="7" cy="17" r="2.2"/>
+                            <circle cx="17" cy="17" r="2.2"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="mb-6">
+                    <h1 class="text-3xl sm:text-5xl font-bold tracking-tight leading-[1.12] mb-3 text-ink">
+                        Every mile has a thousand stories.
+                    </h1>
+                    <p class="text-sub text-sm sm:text-base leading-relaxed">
+                        Put your phone in your pocket and look around. Your AI voice companion narrates the living history of monuments, mountains, coasts, and sacred trails in real time.
+                    </p>
+                </div>
+
+                <div id="aiPromptBar" class="bg-white rounded-3xl p-3.5 sm:p-4 mb-6 flex items-center justify-between cursor-pointer border border-oat hover:border-terra/40 transition shadow-sm group">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-full bg-ink text-white flex items-center justify-center shrink-0">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-medium text-sub">Explore a new way of adventure</p>
+                            <p class="text-sm sm:text-base font-bold text-ink">Start live audio tour with Virasat AI</p>
+                        </div>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-ink text-white flex items-center justify-center group-hover:translate-x-0.5 transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-2.5 sm:gap-3.5 mb-6">
+                    <button data-category="heritage" class="cat-card bg-oat/80 hover:bg-oat rounded-3xl p-3.5 text-left transition flex flex-col justify-between h-28">
+                        <div class="w-8 h-8 rounded-full bg-[#F06449] text-white flex items-center justify-center self-end">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs sm:text-sm font-bold leading-tight text-ink">Royal<br>Heritage</span>
+                    </button>
+
+                    <button data-category="mountains" class="cat-card bg-oat/80 hover:bg-oat rounded-3xl p-3.5 text-left transition flex flex-col justify-between h-28">
+                        <div class="w-8 h-8 rounded-full bg-[#F5B841] text-white flex items-center justify-center self-end">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 20h18L14 6l-4 6-3-4-4 12z"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs sm:text-sm font-bold leading-tight text-ink">Mountain<br>Trails</span>
+                    </button>
+
+                    <button data-category="coastal" class="cat-card bg-oat/80 hover:bg-oat rounded-3xl p-3.5 text-left transition flex flex-col justify-between h-28">
+                        <div class="w-8 h-8 rounded-full bg-[#F49D37] text-white flex items-center justify-center self-end">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs sm:text-sm font-bold leading-tight text-ink">Coastal<br>& Goa</span>
+                    </button>
+
+                    <button data-category="sacred" class="cat-card bg-oat/80 hover:bg-oat rounded-3xl p-3.5 text-left transition flex flex-col justify-between h-28">
+                        <div class="w-8 h-8 rounded-full bg-[#7FB685] text-white flex items-center justify-center self-end">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs sm:text-sm font-bold leading-tight text-ink">Sacred<br>Mandirs</span>
+                    </button>
+
+                    <button data-category="solo" class="cat-card bg-oat/80 hover:bg-oat rounded-3xl p-3.5 text-left transition flex flex-col justify-between h-28">
+                        <div class="w-8 h-8 rounded-full bg-[#E85D75] text-white flex items-center justify-center self-end">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs sm:text-sm font-bold leading-tight text-ink">Curated<br>Itineraries</span>
+                    </button>
+
+                    <button data-category="hidden" class="cat-card bg-oat/80 hover:bg-oat rounded-3xl p-3.5 text-left transition flex flex-col justify-between h-28">
+                        <div class="w-8 h-8 rounded-full bg-[#8B68E6] text-white flex items-center justify-center self-end">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs sm:text-sm font-bold leading-tight text-ink">Hidden<br>Gems</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center justify-between bg-white rounded-full px-6 py-3 shadow-sm border border-oat">
+                    <a href="index.html" class="text-ink p-1.5">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
+                        </svg>
+                    </a>
+                    <a href="../ai-tour-guide/index.html" class="text-sub hover:text-ink p-1.5 transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/>
+                        </svg>
+                    </a>
+                    <a href="../dashboard/index.html" class="w-11 h-11 rounded-full bg-ink text-white flex items-center justify-center shadow-md">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+                        </svg>
+                    </a>
+                    <a href="../ai-tour-planner/index.html" class="text-sub hover:text-ink p-1.5 transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"/>
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="lg:col-span-5 bg-shell rounded-[36px] p-4 sm:p-5 shadow-soft border border-white/60">
+                
+                <div class="relative h-64 sm:h-72 rounded-[28px] overflow-hidden mb-4">
+                    <img id="spotImage" src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=900&q=80" alt="Taj Mahal at Sunrise" class="w-full h-full object-cover transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent"></div>
+                    
+                    <div class="absolute top-3.5 left-3.5 right-3.5 flex justify-between items-center">
+                        <span id="spotBadge" class="bg-black/45 backdrop-blur-md text-white text-xs font-medium px-3.5 py-1.5 rounded-full">
+                            Agra • Royal Wonder
+                        </span>
+                        <span id="spotWeather" class="bg-white/90 backdrop-blur-md text-ink text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-amber-400"></span> 28°C
+                        </span>
+                    </div>
+
+                    <div class="absolute bottom-4 left-4 right-4 text-white">
+                        <p class="text-xs uppercase tracking-widest text-white/80 mb-0.5">Featured Audio Walk</p>
+                        <h2 id="spotTitle" class="text-2xl sm:text-3xl font-bold leading-tight">Dawn at the Taj Mahal</h2>
+                    </div>
+                </div>
+
+                <div class="px-2">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <p class="text-xs font-semibold text-sub">Live Audio Story</p>
+                            <p id="spotListeners" class="text-xs text-sub">14,200+ travelers listened</p>
+                        </div>
+                        <button id="exploreSpotBtn" class="bg-ink text-white text-xs font-semibold px-6 py-2.5 rounded-full hover:opacity-90 transition">
+                            Explore
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <div class="bg-oat/80 rounded-2xl p-3.5 flex flex-col justify-between">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[11px] font-semibold text-sub">Audio Checkpoints</span>
+                                <span class="w-2 h-2 rounded-full bg-terra animate-ping"></span>
+                            </div>
+                            <div class="flex items-center gap-1.5 my-1">
+                                <span class="h-3 w-1 rounded-full bg-terra"></span>
+                                <span class="h-5 w-1 rounded-full bg-ink"></span>
+                                <span class="h-7 w-1 rounded-full bg-terra"></span>
+                                <span class="h-4 w-1 rounded-full bg-ink"></span>
+                                <span class="h-6 w-1 rounded-full bg-ink"></span>
+                                <span class="h-3 w-1 rounded-full bg-sub"></span>
+                                <span class="h-5 w-1 rounded-full bg-terra"></span>
+                                <span class="h-4 w-1 rounded-full bg-sub"></span>
+                                <span class="text-xs font-bold text-ink ml-auto">12 Stops</span>
+                            </div>
+                            <p class="text-[11px] text-sub mt-1">GPS auto-triggered</p>
+                        </div>
+
+                        <div class="bg-oat/80 rounded-2xl p-3.5 flex flex-col justify-between">
+                            <span class="text-[11px] font-semibold text-sub">Journey Timing</span>
+                            <div class="my-1">
+                                <p class="text-[11px] text-terra font-semibold">Best Window</p>
+                                <p id="spotTime" class="text-xs font-bold text-ink">06:00 AM - 09:30 AM</p>
+                            </div>
+                            <p id="spotCrowd" class="text-[11px] text-sub">Low crowd hours</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-3.5 border border-oat flex items-center justify-between">
+                        <div>
+                            <p id="spotDuration" class="text-base sm:text-lg font-bold text-ink">01h 45m</p>
+                            <p class="text-[11px] text-sub">Tour time</p>
+                        </div>
+                        <div class="h-7 w-px bg-oat"></div>
+                        <div>
+                            <p id="spotDistance" class="text-base sm:text-lg font-bold text-ink">3.2 km</p>
+                            <p class="text-[11px] text-sub">Walking trail</p>
+                        </div>
+                        <div class="h-7 w-px bg-oat"></div>
+                        <div>
+                            <p class="text-base sm:text-lg font-bold text-terra">Free</p>
+                            <p class="text-[11px] text-sub">Guest pass</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="w-full max-w-6xl mx-auto px-4 sm:px-8 py-4 text-center sm:flex sm:justify-between sm:items-center text-xs text-sub">
+        <p>Virasat — Personal AI Travel & Heritage Companion</p>
+        <p class="mt-1 sm:mt-0">Agra • Sikkim • Goa • Puri • Varanasi</p>
+    </footer>
+    <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div id="authBackdrop" class="absolute inset-0 bg-ink/20 backdrop-blur-md"></div>
+        <div id="authCard" class="relative bg-shell w-full max-w-[400px] mx-4 rounded-[32px] p-7 sm:p-9 shadow-2xl scale-95 transition-transform duration-300">
+            
+            <button id="closeAuthBtn" class="absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full bg-oat text-sub hover:bg-canvas hover:text-ink transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <div class="flex gap-6 mb-7 border-b border-oat">
+                <button id="tabLogin" class="pb-3 text-sm font-bold text-ink border-b-2 border-ink transition">Log In</button>
+                <button id="tabSignup" class="pb-3 text-sm font-medium text-sub border-b-2 border-transparent hover:text-ink transition">Sign Up</button>
+            </div>
+
+            <form id="formLogin" class="flex flex-col gap-4">
+                <input type="text" placeholder="Username" class="w-full bg-oat/60 border border-transparent focus:bg-white focus:border-terra/40 text-ink text-sm rounded-2xl px-4 py-3.5 outline-none transition placeholder-sub" required>
+                <input type="password" placeholder="Password" class="w-full bg-oat/60 border border-transparent focus:bg-white focus:border-terra/40 text-ink text-sm rounded-2xl px-4 py-3.5 outline-none transition placeholder-sub" required>
+                <button type="submit" class="w-full bg-ink text-shell text-sm font-semibold py-3.5 rounded-2xl hover:opacity-90 active:scale-[0.98] transition mt-2">Log In</button>
+            </form>
+
+            <form id="formSignup" class="hidden flex-col gap-4">
+                <input type="email" placeholder="Email address" class="w-full bg-oat/60 border border-transparent focus:bg-white focus:border-terra/40 text-ink text-sm rounded-2xl px-4 py-3.5 outline-none transition placeholder-sub" required>
+                <input type="text" placeholder="Username" class="w-full bg-oat/60 border border-transparent focus:bg-white focus:border-terra/40 text-ink text-sm rounded-2xl px-4 py-3.5 outline-none transition placeholder-sub" required>
+                <input type="password" placeholder="Password" class="w-full bg-oat/60 border border-transparent focus:bg-white focus:border-terra/40 text-ink text-sm rounded-2xl px-4 py-3.5 outline-none transition placeholder-sub" required>
+                <button type="submit" class="w-full bg-ink text-shell text-sm font-semibold py-3.5 rounded-2xl hover:opacity-90 active:scale-[0.98] transition mt-2">Create Account</button>
+            </form>
+
+            <div class="flex items-center gap-3 my-6">
+                <div class="h-px bg-oat flex-grow"></div>
+                <span class="text-[11px] font-semibold tracking-wider uppercase text-sub">Or</span>
+                <div class="h-px bg-oat flex-grow"></div>
+            </div>
+
+            <button type="button" class="w-full bg-white border border-oat text-ink text-sm font-semibold py-3.5 rounded-2xl flex items-center justify-center gap-3 hover:bg-canvas transition active:scale-[0.98]">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+                Continue with Google
+            </button>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
