@@ -173,3 +173,26 @@ tabSignup.addEventListener('click', () => {
     formLogin.classList.replace('flex', 'hidden');
     formSignup.classList.replace('hidden', 'flex');
 });
+
+const googleSignInBtn = document.getElementById('googleSignInBtn');
+if (googleSignInBtn) {
+    googleSignInBtn.addEventListener('click', async () => {
+        const errorText = document.getElementById('googleAuthError');
+        const originalContent = googleSignInBtn.innerHTML;
+        errorText.hidden = true;
+        googleSignInBtn.disabled = true;
+        googleSignInBtn.textContent = 'Opening Google…';
+        try {
+            await window.VirasatAuth.signIn();
+        } catch (error) {
+            errorText.textContent = error.message;
+            errorText.hidden = false;
+            googleSignInBtn.disabled = false;
+            googleSignInBtn.innerHTML = originalContent;
+        }
+    });
+    // Restore the button when returning with the browser Back button.
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) window.location.reload();
+    });
+}

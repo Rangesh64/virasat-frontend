@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your account · Virasat</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="../config.js" defer></script>
+    <script src="../auth.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header><a class="brand" href="../landing-page/index.html">Virasat</a><button id="logoutBtn" hidden>Sign out</button></header>
+    <main>
+        <p class="eyebrow">YOUR NEXT CHAPTER</p>
+        <h1 id="welcome">Welcome to Virasat</h1>
+        <p id="authStatus" role="status" aria-live="polite">Checking your account…</p>
+        <button id="retryBtn" hidden>Try again</button>
+        <button id="googleSignInBtn" hidden>Continue with Google</button>
+        <a class="back" href="../landing-page/index.html">Explore Virasat →</a>
+    </main>
+</body>
+</html>
