@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virasat — Monument Discovery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        canvas: '#EAE3D2',
+                        shell: '#FAF7F2',
+                        oat: '#F2ECE1',
+                        ink: '#1C1B19',
+                        sub: '#78736A',
+                        terra: '#E06D3B'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-canvas text-ink font-sans antialiased selection:bg-terra selection:text-white min-h-screen pb-28">
+
+    <header class="w-full max-w-6xl mx-auto px-4 sm:px-8 pt-5 sm:pt-7 pb-3 flex justify-between items-center">
+        <a href="../landing-page/index.html" class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-full bg-ink text-shell flex items-center justify-center font-bold text-sm tracking-wider">
+                V
+            </div>
+            <span class="font-bold text-xl tracking-tight text-ink">Virasat</span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-2 bg-shell/80 p-1.5 rounded-full border border-white/60">
+            <a href="../dashboard/index.html" class="text-xs font-semibold text-sub hover:text-ink px-5 py-2 rounded-full transition">Hub</a>
+            <a href="index.html" class="bg-ink text-shell text-xs font-semibold px-5 py-2 rounded-full transition">Monument Discovery</a>
+            <a href="../ai-tour-guide/index.html" class="text-xs font-semibold text-sub hover:text-ink px-5 py-2 rounded-full transition">Live Audio Guide</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+            <span id="totalCounter" class="bg-shell text-ink text-xs font-mono font-semibold px-3.5 py-2 rounded-full border border-oat">
+                06 Archives
+            </span>
+        </div>
+    </header>
+
+    <main class="w-full max-w-6xl mx-auto px-4 sm:px-8 pt-4">
+
+        <section class="bg-shell rounded-[36px] p-5 sm:p-8 shadow-soft border border-white/60 mb-7">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5 mb-6">
+                <div>
+                    <div class="inline-flex items-center gap-2 mb-2">
+                        <span class="w-2 h-2 rounded-full bg-terra"></span>
+                        <span class="text-[11px] font-mono uppercase tracking-widest text-sub">Spatial Monument Index</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-4xl font-bold tracking-tight text-ink">Discover & Curate Your Trail</h1>
+                </div>
+
+                <div class="relative w-full lg:w-[420px]">
+                    <input id="searchInput" type="text" placeholder="Search by monument, city, tag, or GPS..." class="w-full bg-oat/75 focus:bg-white border border-transparent focus:border-terra/40 rounded-full pl-11 pr-10 py-3.5 text-sm text-ink placeholder-sub outline-none transition">
+                    <svg class="w-4 h-4 text-sub absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+                    </svg>
+                    <button id="clearSearchBtn" class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-canvas text-ink items-center justify-center text-xs font-bold">
+                        ✕
+                    </button>
+                </div>
+            </div>
+
+            <div id="tagFilterBar" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+                <button data-tag="all" class="tag-pill active shrink-0 text-xs font-semibold px-4 py-2 rounded-full bg-ink text-shell transition">
+                    All Locations
+                </button>
+                <button data-tag="Mughal Architecture" class="tag-pill shrink-0 text-xs font-semibold px-4 py-2 rounded-full bg-oat text-ink hover:bg-canvas transition">
+                    Mughal Architecture
+                </button>
+                <button data-tag="Sacred Shrine" class="tag-pill shrink-0 text-xs font-semibold px-4 py-2 rounded-full bg-oat text-ink hover:bg-canvas transition">
+                    Sacred Shrine
+                </button>
+                <button data-tag="Coastal Basilica" class="tag-pill shrink-0 text-xs font-semibold px-4 py-2 rounded-full bg-oat text-ink hover:bg-canvas transition">
+                    Coastal Basilica
+                </button>
+                <button data-tag="Himalayan Monastery" class="tag-pill shrink-0 text-xs font-semibold px-4 py-2 rounded-full bg-oat text-ink hover:bg-canvas transition">
+                    Himalayan Monastery
+                </button>
+                <button data-tag="Ancient Ruins" class="tag-pill shrink-0 text-xs font-semibold px-4 py-2 rounded-full bg-oat text-ink hover:bg-canvas transition">
+                    Ancient Ruins
+                </button>
+            </div>
+        </section>
+
+        <section id="monumentGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></section>
+
+        <div id="emptyState" class="hidden bg-shell rounded-[32px] p-12 text-center border border-white/60 my-6">
+            <p class="text-base font-bold text-ink mb-1">No matching monuments in the archive</p>
+            <p class="text-xs text-sub mb-5">Try searching a different city, architectural tag, or coordinate prefix.</p>
+            <button id="resetFiltersBtn" class="bg-ink text-shell text-xs font-semibold px-5 py-2.5 rounded-full">
+                Reset Archive View
+            </button>
+        </div>
+
+    </main>
+
+    <div id="routeTray" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-xl bg-ink text-shell rounded-full px-5 py-3.5 shadow-2xl flex items-center justify-between transition-all duration-300 translate-y-28 opacity-0 pointer-events-none">
+        <div class="flex items-center gap-3">
+            <span id="routeCountBadge" class="w-7 h-7 rounded-full bg-terra text-white text-xs font-bold flex items-center justify-center">0</span>
+            <div>
+                <p class="text-xs font-bold text-shell">Monuments in Audio Trail</p>
+                <p id="routeNamesPreview" class="text-[11px] text-shell/70 truncate max-w-[180px] sm:max-w-[260px]"></p>
+            </div>
+        </div>
+        <a href="../ai-tour-guide/index.html" class="bg-shell text-ink text-xs font-bold px-5 py-2.5 rounded-full hover:bg-oat transition shrink-0">
+            Launch Audio Tour →
+        </a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
