@@ -1,11 +1,8 @@
-* { box-sizing: border-box; }
-[hidden] { display: none !important; }
-body { margin: 0; background: #eae3d2; color: #1c1b19; font-family: system-ui, sans-serif; }
-header { max-width: 1120px; margin: auto; padding: 28px 24px; display: flex; align-items: center; justify-content: space-between; }
-a { color: inherit; } .brand { font-size: 24px; font-weight: 750; text-decoration: none; }
-main { max-width: 680px; margin: 8vh auto; padding: clamp(24px, 6vw, 56px); background: #faf7f2; border-radius: 32px; }
-.eyebrow { color: #995028; font-size: 12px; letter-spacing: .15em; font-weight: 700; }
-h1 { font-size: clamp(28px, 5vw, 44px); letter-spacing: -.04em; }
-#authStatus { color: #615c54; line-height: 1.6; overflow-wrap: anywhere; }
-button { background: #1c1b19; color: #faf7f2; padding: 13px 22px; border: 0; border-radius: 24px; font: inherit; cursor: pointer; }
-button:disabled { opacity: .6; cursor: wait; } .back { display: block; margin-top: 32px; }
+body {
+    background-image: radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.45) 0%, transparent 50%),
+                      radial-gradient(circle at 85% 80%, rgba(224, 109, 59, 0.08) 0%, transparent 45%);
+}
+
+.shadow-soft {
+    box-shadow: 0 20px 50px -12px rgba(28, 27, 25, 0.08);
+}
