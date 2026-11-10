@@ -49,3 +49,25 @@ logoutBtn.addEventListener('click', async () => {
     }
 });
 loadAccount();
+const globalSearchForm = document.getElementById('globalSearchForm');
+const globalSearchInput = document.getElementById('globalSearchInput');
+const cityPills = document.querySelectorAll('.city-pill');
+
+if (globalSearchForm) {
+    globalSearchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const query = globalSearchInput.value.trim();
+        if (query) {
+            window.location.href = `../ai-tour-planner/index.html?q=${encodeURIComponent(query)}`;
+        } else {
+            window.location.href = '../ai-tour-planner/index.html';
+        }
+    });
+}
+
+cityPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+        const city = pill.getAttribute('data-city');
+        window.location.href = `../ai-tour-planner/index.html?q=${encodeURIComponent(city)}`;
+    });
+});
