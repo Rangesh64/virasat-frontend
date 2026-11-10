@@ -45,12 +45,18 @@
             <a href="../ai-tour-guide/index.html" class="text-xs font-semibold text-sub hover:text-ink px-5 py-2 rounded-full transition">Live Audio Guide</a>
         </nav>
 
-        <div class="flex items-center gap-3">
+       <div class="flex items-center gap-3">
             <div class="hidden sm:flex items-center gap-2 bg-shell px-3.5 py-1.5 rounded-full border border-oat">
                 <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                 <span class="text-xs font-semibold text-ink">GPS Ready</span>
             </div>
-            <button id="logoutBtn" class="bg-oat hover:bg-ink hover:text-shell text-ink text-xs font-semibold px-4 py-2.5 rounded-full transition">
+            <button id="retryBtn" hidden class="bg-oat hover:bg-ink hover:text-shell text-ink text-xs font-semibold px-4 py-2.5 rounded-full transition">
+                Retry
+            </button>
+            <button id="googleSignInBtn" class="bg-ink text-shell text-xs font-semibold px-4 py-2.5 rounded-full hover:opacity-90 transition">
+                Sign In with Google
+            </button>
+            <button id="logoutBtn" hidden class="bg-oat hover:bg-ink hover:text-shell text-ink text-xs font-semibold px-4 py-2.5 rounded-full transition">
                 Log Out
             </button>
         </div>
@@ -60,9 +66,10 @@
         
         <div class="bg-shell rounded-[36px] p-6 sm:p-9 shadow-soft border border-white/60 mb-6">
             <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-7">
-                <div>
+               <div>
                     <p class="text-xs font-bold uppercase tracking-widest text-terra mb-1.5">Traveler Hub</p>
-                    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-ink">Where does the trail lead today?</h1>
+                    <h1 id="welcome" class="text-3xl sm:text-4xl font-bold tracking-tight text-ink">Welcome to Virasat</h1>
+                    <p id="authStatus" class="text-xs sm:text-sm text-sub mt-1">Checking your account…</p>
                 </div>
                 <form id="globalSearchForm" class="w-full lg:w-96 relative">
                     <input id="globalSearchInput" type="text" placeholder="Search city, monument, or coordinates..." class="w-full bg-oat/70 focus:bg-white border border-transparent focus:border-terra/40 rounded-full pl-11 pr-24 py-3.5 text-sm text-ink placeholder-sub outline-none transition">
