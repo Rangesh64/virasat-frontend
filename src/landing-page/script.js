@@ -196,3 +196,12 @@ if (googleSignInBtn) {
         if (event.persisted) window.location.reload();
     });
 }
+formLogin.addEventListener('submit', (e) => {
+    e.preventDefault();
+    window.location.href = '../dashboard/index.html';
+});
+
+formSignup.addEventListener('submit', (e) => {
+    e.preventDefault();
+    window.location.href = '../dashboard/index.html';
+});
