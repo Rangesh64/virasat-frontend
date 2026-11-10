@@ -1,0 +1,37 @@
+body {
+    background-image: radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.45) 0%, transparent 50%),
+                      radial-gradient(circle at 85% 80%, rgba(224, 109, 59, 0.08) 0%, transparent 45%);
+}
+
+.shadow-soft {
+    box-shadow: 0 20px 50px -12px rgba(28, 27, 25, 0.08);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.monument-card {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+}
+
+.monument-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 58px -14px rgba(28, 27, 25, 0.13);
+}
+
+.monument-card:hover .card-photo {
+    transform: scale(1.04);
+}
+
+.perforated-divider {
+    background-image: linear-gradient(to right, #D8D0C1 50%, rgba(255, 255, 255, 0) 0%);
+    background-position: bottom;
+    background-size: 10px 1.5px;
+    background-repeat: repeat-x;
+}
