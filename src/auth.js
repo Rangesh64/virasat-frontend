@@ -1,12 +1,16 @@
 /* Shared cookie-based authentication. No tokens are stored in JavaScript. */
 (function () {
-    const apiBase = (window.VIRASAT_API_BASE_URL || "http://127.0.0.1:8000").replace(/\/$/, "");
+    const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost";
+    const defaultApiBase = isLocal ? "http://127.0.0.1:8000" : "https://virasatguide-backend-epsu.vercel.app";
+    const apiBase = (window.VIRASAT_API_BASE_URL || window.API_BASE_URL || defaultApiBase).replace(/\/$/, "");
+
     async function request(path, options = {}) {
         const response = await fetch(apiBase + path, { ...options, credentials: "include", cache: "no-store" });
         if (response.status === 401) return null;
         if (!response.ok) throw new Error("We could not reach your account. Please try again.");
         return response.json();
     }
+
     window.VirasatAuth = {
         async signIn() {
             let status;
