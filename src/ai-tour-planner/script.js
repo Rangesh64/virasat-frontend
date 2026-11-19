@@ -1,4 +1,5 @@
-const API_ENDPOINT = '/api/monuments';
+const BACKEND_URL = window.API_BASE_URL || 'http://127.0.0.1:8000';
+const API_ENDPOINT = `${BACKEND_URL}/api/v1/monuments`;
 
 const fallbackMonuments = [
     {
