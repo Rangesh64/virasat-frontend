@@ -1,4 +1,5 @@
-const BASE_URL = 'http://127.0.0.1:8000/api/v1/monuments'; 
+const BACKEND_URL = window.API_BASE_URL || 'http://127.0.0.1:8000';
+const BASE_URL = `${BACKEND_URL}/api/v1/monuments`;
 
 const urlParams = new URLSearchParams(window.location.search);
 const monumentId = urlParams.get('id');
