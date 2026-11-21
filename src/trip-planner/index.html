@@ -1,1 +1,128 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#EAE3D2"><meta name="description" content="Explore heritage travel with Virasat. Start with a destination and discover places worth visiting."><title>Plan a visit — Virasat</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../virasat.css"></head><body><header class="site-header page-shell"><a href="../landing-page/index.html" class="brand"><span class="brand-mark">V</span><span>virasat<span class="terra">.</span></span></a><nav class="site-nav" aria-label="Main navigation"><a href="../landing-page/index.html">Home</a><a href="../ai-tour-planner/index.html">Explore places</a><a href="index.html" aria-current="page">Plan a trip</a><a href="../ai-tour-guide/index.html">Audio guide</a></nav><div class="header-actions"><a href="../dashboard/index.html" class="btn btn-outline btn-small">My space ↗</a></div></header><main class="page-shell"><section style="padding:38px 0 9px"><div class="label">A LITTLE ROOM FOR WANDERING</div><h1 class="index-title" style="max-width:650px">A good trip starts<br>with <span class="terra">a little curiosity.</span></h1><p class="body-copy" style="max-width:520px">A weekend away or a longer escape? Tell us what you have in mind, and start finding places that feel like you.</p></section><section class="trip-layout" aria-label="Trip planner"><div class="paper trip-form"><div class="kicker">YOUR NEXT JOURNEY</div><h2>Where to?</h2><div class="trip-fields"><div class="wide"><label class="field-label" for="destination">Destination</label><input class="field" id="destination" placeholder="e.g. Jaipur, Rajasthan" autocomplete="address-level2"></div><div><label class="field-label" for="days">Days</label><input class="field" id="days" type="number" min="1" max="30" value="2"></div><div><label class="field-label" for="travelers">Travelers</label><input class="field" id="travelers" type="number" min="1" max="30" value="2"></div><div class="wide"><label class="field-label" for="interests">What do you love?</label><textarea class="field" id="interests" placeholder="Old forts, quiet museums, local food, beautiful architecture…"></textarea></div><div class="wide"><label class="field-label" for="budget">Approximate budget (₹, optional)</label><input class="field" id="budget" type="number" min="0" step="100" placeholder="e.g. 8000"></div></div><div class="preview-panel"><div class="kicker">PERSONALIZED PLANS ARE COMING</div><h3>We're putting the finishing touches on this.</h3><p>Your travel details will soon turn into a day-by-day itinerary with estimated costs, places to visit, and a PDF you can take along.</p></div><button id="exploreDestinationBtn" class="btn btn-terra" style="width:100%;margin-top:20px" type="button">Explore places in this destination ↗</button><p class="notice" style="margin:12px 0 0">This searches our live monument collection. It doesn't generate an AI itinerary yet.</p></div><div class="trip-right"><div class="paper trip-aside"><div class="label">THOUGHTFULLY PLANNED</div><h3>Less planning.<br>More being there.</h3><p>Virasat will help you turn a destination into a realistic itinerary, with the details that matter when you're actually traveling.</p><ol class="steps"><li>Tell us where you're headed</li><li>Choose what interests you</li><li>Get a day-by-day plan</li><li>Save it as a PDF for your trip</li></ol></div><div class="paper-soft" style="padding:27px"><div class="kicker">WHILE YOU'RE HERE</div><p style="font-size:15px;line-height:1.6;letter-spacing:-.03em;font-weight:700;margin:13px 0 18px">Not ready to plan? Start with a place you’d love to see.</p><a href="../ai-tour-planner/index.html" class="link-arrow">Browse monuments <span class="arrow">↗</span></a></div></div></section></main><footer class="page-shell site-footer"><div>Virasat · A different way to see India.</div><span>GO SLOW. LOOK CLOSER.</span></footer><nav class="bottom-nav" aria-label="Mobile navigation"><a href="../landing-page/index.html"><span class="nav-icon">⌂</span>Home</a><a href="../ai-tour-planner/index.html"><span class="nav-icon">⌕</span>Explore</a><a href="index.html" aria-current="page"><span class="nav-icon">▤</span>Plan</a><a href="../dashboard/index.html"><span class="nav-icon">◎</span>My space</a></nav><script src="../api.js"></script><script src="script.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#EAE3D2">
+<meta name="description" content="Plan a heritage trip with day-by-day stops, a travel budget, sources, and a downloadable itinerary.">
+<title>Plan a visit — Virasat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../virasat.css">
+</head>
+<body>
+<header class="site-header page-shell">
+<a href="../landing-page/index.html" class="brand" aria-label="Virasat home"><span class="brand-mark">V</span><span>virasat<span class="terra">.</span></span></a>
+<nav class="site-nav" aria-label="Main navigation">
+<a href="../landing-page/index.html">Home</a>
+<a href="../ai-tour-planner/index.html">Explore places</a>
+<a href="index.html" aria-current="page">Plan a trip</a>
+<a href="../ai-tour-guide/index.html">Audio guide</a>
+</nav>
+<div class="header-actions"><a href="../dashboard/index.html" class="btn btn-outline btn-small">My space ↗</a></div>
+</header>
+<main class="page-shell">
+<section class="trip-intro">
+<div class="label">MAKE SOME ROOM FOR ADVENTURE</div>
+<h1 class="index-title">Let's make it<br><span class="terra">a trip to remember.</span></h1>
+<p class="body-copy">Tell us where you're going and what you enjoy. We'll find a way to fit the good stuff in.</p>
+</section>
+<section class="trip-layout" aria-label="Trip planner">
+<div class="paper trip-form">
+<div class="kicker">YOUR NEXT JOURNEY</div>
+<h2>Where to?</h2>
+<form id="tripForm" novalidate>
+<div class="trip-fields">
+<div class="wide">
+<label class="field-label" for="destination">Where are we headed? *</label>
+<input class="field" id="destination" name="destination" maxlength="120" required placeholder="e.g. Jaipur" autocomplete="address-level2">
+</div>
+<div>
+<label class="field-label" for="days">How many days? *</label>
+<input class="field" id="days" name="days" type="number" min="1" max="7" step="1" value="2" required>
+</div>
+<div>
+<label class="field-label" for="travelers">How many travelers? *</label>
+<input class="field" id="travelers" name="travelers" type="number" min="1" max="20" step="1" value="2" required>
+</div>
+<div>
+<label class="field-label" for="city">City (optional)</label>
+<input class="field" id="city" name="city" maxlength="120" placeholder="e.g. Jaipur">
+</div>
+<div>
+<label class="field-label" for="area">Area (optional)</label>
+<input class="field" id="area" name="area" maxlength="120" placeholder="e.g. Pink City">
+</div>
+<div class="wide">
+<label class="field-label" for="interests">What do you like?</label>
+<textarea class="field" id="interests" name="interests" maxlength="650" placeholder="Fort walks, quiet museums, local food, architecture" aria-describedby="interestsHelp"></textarea>
+<span id="interestsHelp" class="field-hint">Separate interests with commas. Up to eight.</span>
+</div>
+<div class="wide">
+<label class="field-label" for="budget">Total trip budget for everyone (₹, optional)</label>
+<input class="field" id="budget" name="budget" type="number" min="0" max="100000000" step="1" placeholder="e.g. 8000">
+</div>
+<details class="wide advanced-options">
+<summary>Have a specific location? <span aria-hidden="true">+</span></summary>
+<div class="trip-fields" style="margin-top:16px">
+<div><label class="field-label" for="latitude">Latitude</label><input class="field" id="latitude" type="number" min="-90" max="90" step="any" placeholder="27.1751"></div>
+<div><label class="field-label" for="longitude">Longitude</label><input class="field" id="longitude" type="number" min="-180" max="180" step="any" placeholder="78.0421"></div>
+</div>
+<p class="field-hint">Coordinates help with searches; exact travel distances aren't verified yet.</p>
+</details>
+</div>
+<div id="planError" class="inline-alert" role="alert" hidden></div>
+<div id="planProgress" class="generation-progress" role="status" aria-live="polite" hidden>
+<span class="loader-ring" aria-hidden="true"></span>
+<div><strong>Putting your itinerary together…</strong><p>Research and planning can take a little while. Please keep this page open.</p></div>
+</div>
+<div class="trip-form-actions">
+<button id="generatePlanBtn" class="btn btn-terra" type="submit">Build my trip ↗</button>
+<a id="planSignInBtn" href="../landing-page/index.html?auth=1" class="btn btn-outline" hidden>Sign in to plan ↗</a>
+</div>
+<p class="field-hint">Costs are estimates, not quotes. Confirm timings and prices before traveling.</p>
+</form>
+</div>
+<div class="trip-right">
+<div id="planWelcome" class="paper trip-aside">
+<div class="label">GOOD DAYS, WELL SPENT</div>
+<h3>Less planning.<br>More being there.</h3>
+<p>Your plan will bring together historic places, suggested times, and a budget you can keep an eye on.</p>
+<ol class="steps"><li>Tell us where you're headed</li><li>Pick the things you love</li><li>Get a day-by-day itinerary</li><li>Take the PDF along</li></ol>
+</div>
+<div id="recentPlanPanel" class="paper-soft recent-plan" hidden>
+<div class="kicker">PICK UP WHERE YOU LEFT OFF</div>
+<h3>Your last itinerary</h3>
+<p>Open the plan you made earlier, without generating it again.</p>
+<button id="openRecentPlanBtn" class="btn btn-ink btn-small" type="button">Open saved plan ↗</button>
+</div>
+<div class="paper-soft" style="padding:27px">
+<div class="kicker">NOT READY TO PLAN?</div>
+<p class="trip-side-note">Just looking around? Find a place that catches your eye.</p>
+<a href="../ai-tour-planner/index.html" class="link-arrow">Explore monuments <span class="arrow">↗</span></a>
+</div>
+</div>
+</section>
+<section id="planResults" class="plan-results" aria-label="Your itinerary" aria-live="polite" hidden>
+<div class="plan-topline"><div class="label">YOUR PERSONAL ITINERARY</div><span id="planCreated" class="count"></span></div>
+<div class="plan-title-row"><div><h2 id="planTitle" class="section-heading"></h2><p id="planSummary" class="body-copy"></p></div><button id="downloadPdfBtn" type="button" class="btn btn-ink">Download PDF ↗</button></div>
+<div id="planBudget" class="budget-strip"></div>
+<div id="planDays" class="plan-days"></div>
+<div class="plan-footnotes"><div id="planTips" class="paper plan-notes" hidden><div class="kicker">BEFORE YOU GO</div></div><div id="planWarnings" class="paper plan-notes" hidden><div class="kicker">GOOD TO KNOW</div></div></div>
+<div id="planSources" class="paper plan-notes" hidden><div class="kicker">SOURCES & REFERENCES</div><div id="planSourcesList" class="sources-grid"></div></div>
+<p class="field-hint" style="margin:18px 0 38px">Prices, opening hours and travel routes are estimates. Always confirm with local sources.</p>
+</section>
+</main>
+<footer class="page-shell site-footer"><div>Virasat · A different way to see India.</div><span>GO SLOW. LOOK CLOSER.</span></footer>
+<nav class="bottom-nav" aria-label="Mobile navigation">
+<a href="../landing-page/index.html"><span class="nav-icon">⌂</span>Home</a>
+<a href="../ai-tour-planner/index.html"><span class="nav-icon">⌕</span>Explore</a>
+<a href="index.html" aria-current="page"><span class="nav-icon">▤</span>Plan</a>
+<a href="../dashboard/index.html"><span class="nav-icon">◎</span>My space</a>
+</nav>
+<script src="../config.js"></script>
+<script src="../api.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
