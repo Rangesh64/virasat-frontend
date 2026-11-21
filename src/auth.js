@@ -27,7 +27,7 @@
                 const payload = await response.json();
                 message = typeof payload.detail === "string" ? payload.detail : null;
             } catch {}
-            throw new Error(message || "We couldn't reach your account. Please try again.");
+            throw new Error(message || "We could not reach your account. Please try again.");
         }
         return response.json();
     }
