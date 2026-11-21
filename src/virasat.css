@@ -299,3 +299,17 @@ img{display:block;max-width:100%}
 @media(max-width:900px){.day-stops{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:680px){.trip-intro{padding:24px 0 0}.trip-intro .index-title{font-size:39px}.trip-form-actions{flex-direction:column}.trip-form-actions .btn{width:100%}.plan-topline{padding-top:20px}.plan-title-row{flex-direction:column;gap:13px;margin-bottom:20px}.plan-title-row h2{font-size:34px}.plan-title-row .btn{margin-top:0;width:100%}.budget-strip{grid-template-columns:1fr 1fr}.budget-strip .budget-total{grid-column:1/-1}.budget-strip>div{min-height:102px;padding:20px}.budget-strip>div+div{border-left:0}.budget-strip>div:last-child{border-left:1px solid var(--line)}.budget-strip strong{font-size:20px}.budget-strip .budget-total strong{font-size:28px}.day-section{padding-top:24px}.day-head{gap:12px}.day-head h3{font-size:23px}.day-stops{grid-template-columns:1fr;gap:9px}.stop-card{min-height:auto;padding:20px}.stop-card h4{font-size:19px}.stop-description{font-size:12px}.day-costs{justify-content:flex-start;gap:11px 17px}.plan-footnotes,.sources-grid{grid-template-columns:1fr}.plan-notes{padding:22px}.tour-questions-head h3{font-size:21px}.tour-question-symbol{width:40px;height:40px}.question-actions .field-hint{max-width:160px}}
 @media(max-width:350px){.trip-intro .index-title{font-size:34px}.budget-strip{grid-template-columns:1fr}.budget-strip .budget-total{grid-column:auto}.budget-strip>div:last-child{border-left:0;border-top:1px solid var(--line)}.budget-strip>div:nth-child(2){border-top:1px solid var(--line)}}
+
+
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;background:var(--oat);border-radius:13px;margin:22px 0 18px}
+.auth-tab{background:transparent;border:0;padding:11px 9px;color:var(--sub);border-radius:10px;font-size:12px;font-weight:800}
+.auth-tab.is-active{background:var(--shell);color:var(--ink);box-shadow:0 2px 9px rgba(28,27,25,.05)}
+.email-auth-form{display:flex;flex-direction:column}
+.email-auth-form .field{min-height:44px}
+.email-auth-form>.btn{margin-top:18px}
+.auth-divider{display:flex;align-items:center;gap:13px;margin:21px 0 15px;color:var(--sub);font:500 9px var(--mono);letter-spacing:.08em}
+.auth-divider:before,.auth-divider:after{content:"";height:1px;background:var(--line);flex:1}
+.auth-google-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.auth-google-actions .btn{min-width:0;font-size:11px;padding:11px 8px;margin:0}
+.modal-card>#browseGuestBtn{margin-top:10px;background:transparent}
+@media(max-width:400px){.modal-card{padding:23px}.auth-google-actions .btn{font-size:10px}}
