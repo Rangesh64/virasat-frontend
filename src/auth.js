@@ -45,10 +45,12 @@
     window.VirasatAuth = {
         async signIn() {
             await googleReady();
+            window.localStorage?.removeItem("virasat_token");
             window.location.assign(apiBase + "/auth/google/login");
         },
         async signUp() {
             await googleReady();
+            window.localStorage?.removeItem("virasat_token");
             window.location.assign(apiBase + "/auth/google/signup");
         },
         async login(username, password) {
