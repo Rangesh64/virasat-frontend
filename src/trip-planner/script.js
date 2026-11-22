@@ -370,6 +370,7 @@ function addStop(value = "") {
     actions.appendChild(remove);
     row.append(input, actions);
     holder.appendChild(row);
+    wireLocationInput(input);
     updateStops();
     input.focus();
 }
@@ -602,3 +603,85 @@ $("departureDate").min = [today.getFullYear(), String(today.getMonth() + 1).padS
 $("returnDate").min = $("departureDate").min;
 updateStops();
 loadCapabilities();
+
+
+let suggestUnavailable = false;
+let suggestionTimer = null;
+let activeSuggestionList = null;
+
+function closeSuggestions() {
+    if (activeSuggestionList) activeSuggestionList.remove();
+    activeSuggestionList = null;
+    document.querySelectorAll(".journey-route-field input, .route-stop-input").forEach(input => {
+        input.setAttribute("aria-expanded", "false");
+    });
+}
+
+function wireLocationInput(input) {
+    input.autocomplete = "off";
+    input.setAttribute("aria-autocomplete", "list");
+    input.addEventListener("input", () => {
+        window.clearTimeout(suggestionTimer);
+        closeSuggestions();
+        const query = input.value.trim();
+        if (suggestUnavailable || query.length < 3) return;
+        suggestionTimer = window.setTimeout(async () => {
+            let suggestions;
+            try {
+                const response = await api.suggestPlaces(query);
+                suggestions = Array.isArray(response) ? response : response.items || response.results || [];
+            } catch (error) {
+                if (error.status === 404) suggestUnavailable = true;
+                return;
+            }
+            if (input.value.trim() !== query || !suggestions.length || document.activeElement !== input) return;
+            const parent = input.closest(".journey-route-field, .route-stop-row");
+            if (!parent) return;
+            closeSuggestions();
+            const list = node("div", "journey-suggestions");
+            list.setAttribute("role", "listbox");
+            list.id = "suggest-" + Math.random().toString(36).slice(2, 9);
+            input.setAttribute("aria-controls", list.id);
+            input.setAttribute("aria-expanded", "true");
+            suggestions.slice(0, 6).forEach(result => {
+                const value = typeof result === "string" ? result : result.label || result.display_name || result.name;
+                if (!value) return;
+                const choice = node("button", "journey-suggestion", value);
+                choice.type = "button";
+                choice.setAttribute("role", "option");
+                choice.addEventListener("pointerdown", event => event.preventDefault());
+                choice.addEventListener("click", event => {
+                    event.preventDefault();
+                    input.value = value;
+                    input.dispatchEvent(new Event("change", { bubbles: true }));
+                    closeSuggestions();
+                    input.focus();
+                });
+                list.appendChild(choice);
+            });
+            if (!list.childNodes.length) return;
+            parent.appendChild(list);
+            activeSuggestionList = list;
+        }, 320);
+    });
+    input.addEventListener("keydown", event => {
+        if (event.key === "Escape") closeSuggestions();
+        if (event.key === "ArrowDown" && activeSuggestionList) {
+            event.preventDefault();
+            activeSuggestionList.querySelector("button")?.focus();
+        }
+    });
+}
+
+document.addEventListener("click", event => {
+    if (!event.target.closest(".journey-route-field, .route-stop-row")) closeSuggestions();
+});
+document.addEventListener("focusout", event => {
+    if (event.target.matches(".journey-route-field input, .route-stop-input")) {
+        window.setTimeout(() => {
+            if (!document.activeElement?.closest(".journey-suggestions")) closeSuggestions();
+        }, 180);
+    }
+});
+wireLocationInput($("origin"));
+wireLocationInput($("destination"));
