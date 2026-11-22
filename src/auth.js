@@ -45,16 +45,8 @@
     window.VirasatAuth = {
         async continueGoogle() {
             await googleReady();
-            let unified = false;
-            try {
-                const response = await fetch(apiBase + "/api/v1/travel/capabilities", { credentials: "include", cache: "no-store" });
-                if (response.ok) {
-                    const capabilities = await response.json();
-                    unified = capabilities.profile_onboarding === true;
-                }
-            } catch {}
             window.localStorage?.removeItem("virasat_token");
-            window.location.assign(apiBase + (unified ? "/auth/google/continue" : "/auth/google/login"));
+            window.location.assign(apiBase + "/auth/google/continue");
         },
         async setCredentials(username, password) {
             const response = await fetch(apiBase + "/auth/credentials", {
