@@ -124,7 +124,9 @@
                     const latest = await window.VirasatSession.refresh();
                     if (latest && latest.credentials_set === true) {
                         account = latest;
-                        close();
+                        dialog.hidden = true;
+                        document.body.classList.remove("credential-dialog-open");
+                        form.reset();
                         return;
                     }
                 } catch {}
