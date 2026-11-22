@@ -145,3 +145,41 @@ test("dashboard has a friendly guest state without suggesting a logout", async (
     await new Promise(setImmediate);
     assert.match(elements.authStatus.textContent, /sign in/);
 });
+
+
+test("Google credential setup sends bearer or cookie credentials to its own endpoint", async () => {
+    const { auth, calls, storage } = harness(() => ok({ login_username: "heritage.traveler", credentials_set: true }));
+    storage.set("virasat_token", "existing-token");
+    const result = await auth.setCredentials("heritage.traveler", "securepass123");
+    assert.equal(result.credentials_set, true);
+    assert.equal(result.login_username, "heritage.traveler");
+    assert.equal(calls[0].url, "http://127.0.0.1:8000/auth/credentials");
+    assert.equal(calls[0].options.method, "PUT");
+    assert.equal(calls[0].options.credentials, "include");
+    assert.equal(calls[0].options.headers.Authorization, "Bearer existing-token");
+    assert.deepEqual(JSON.parse(calls[0].options.body), { username: "heritage.traveler", password: "securepass123" });
+});
+
+test("duplicate username or previously set credentials returns actionable 409", async () => {
+    const { auth } = harness(() => ({
+        ok: false,
+        status: 409,
+        json: async () => ({ detail: "Username already taken" })
+    }));
+    await assert.rejects(auth.setCredentials("taken.username", "securepass123"), error => error.status === 409 && /already taken/.test(error.message));
+});
+
+test("account onboarding uses login_username and does not block Google credential setup", () => {
+    const script = fs.readFileSync(path.join(root, "src/session-ui.js"), "utf8");
+    const setup = fs.readFileSync(path.join(root, "src/credential-setup.js"), "utf8");
+    assert.match(script, /user\.login_username/);
+    assert.match(script, /account\.google_sub && account\.credentials_set === false/);
+    assert.match(setup, /auth\.setCredentials\(username, password\)/);
+    assert.match(setup, /\^\[A-Za-z0-9\._-\]\{3,32\}\$/);
+    assert.match(setup, /password\.length < 8 \|\| password\.length > 128/);
+    assert.match(setup, /failure\.status === 409/);
+    for (const folder of ["landing-page", "dashboard", "ai-tour-planner", "ai-tour-guide", "trip-planner"]) {
+        const html = fs.readFileSync(path.join(root, "src", folder, "index.html"), "utf8");
+        assert.match(html, /src="\.\.\/credential-setup\.js"/, folder);
+    }
+});
