@@ -338,3 +338,129 @@ body:before{opacity:.14}
   .bottom-nav a{min-width:62px;display:flex;flex-direction:column;align-items:center;gap:4px;color:#6c8774;font-size:9px;font-weight:700}
   .bottom-nav a[aria-current=page]{color:#315e42}
 }
+
+
+.journey-page .journey-workspace,
+.journey-page .journey-main,
+.journey-page .journey-aside,
+.journey-page .journey-panel,
+.journey-page .journey-two-cols,
+.journey-page .journey-two-cols > div,
+.journey-page .journey-aside-fields,
+.journey-page .journey-route,
+.journey-page .journey-route-fields,
+.journey-page .stay-caption{
+  min-width:0;
+  max-width:100%;
+}
+.journey-page .journey-two-cols{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.journey-page .journey-dates{
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,235px),1fr));
+  align-items:end;
+  gap:15px 12px;
+}
+.journey-page .journey-two-cols .field,
+.journey-page .journey-route-field input,
+.journey-page .journey-aside-fields .field,
+.journey-page .budget-input-wrap input{
+  display:block;
+  width:100%;
+  min-width:0;
+  max-width:100%;
+  box-sizing:border-box;
+}
+.journey-page .journey-dates .field{
+  min-height:54px;
+  height:auto;
+  padding:13px 14px;
+  font-size:16px;
+  line-height:1.4;
+  color:#294b38;
+  background:#fff;
+  color-scheme:light;
+  -webkit-appearance:auto;
+  appearance:auto;
+}
+.journey-page .journey-dates .field::-webkit-date-and-time-value{
+  min-width:0;
+  text-align:left;
+}
+.journey-page .journey-dates .field-label{
+  display:block;
+  line-height:1.5;
+  margin-bottom:9px;
+  white-space:normal;
+  overflow-wrap:break-word;
+}
+.journey-page .journey-dates .field-optional{
+  white-space:nowrap;
+}
+.journey-page .stay-caption strong,
+.journey-page .field-hint,
+.journey-page .journey-results-head,
+.journey-page .journey-availability{
+  overflow-wrap:anywhere;
+}
+.journey-page .travel-offer{
+  min-width:0;
+}
+.journey-page .travel-offer-aside{
+  min-width:0;
+}
+@media(max-width:730px){
+  .journey-page .journey-workspace{
+    grid-template-columns:minmax(0,1fr);
+  }
+  .journey-page .journey-two-cols{
+    gap:12px;
+  }
+  .journey-page .journey-dates{
+    gap:17px;
+  }
+  .journey-page .journey-dates .field{
+    min-height:54px;
+    padding:14px 15px;
+  }
+  .journey-page .journey-party .field{
+    min-height:50px;
+    height:auto;
+    font-size:16px;
+  }
+}
+@media(max-width:400px){
+  .journey-page .journey-panel{
+    padding:22px 16px;
+  }
+  .journey-page .journey-party{
+    gap:10px;
+  }
+  .journey-page .journey-party .field{
+    padding:12px;
+  }
+  .journey-page .travel-modes{
+    gap:5px;
+  }
+  .journey-page .travel-mode input+span{
+    min-height:91px;
+    padding:11px 3px;
+  }
+  .journey-page .stay-caption{
+    padding:10px;
+  }
+}
+@media(max-width:330px){
+  .journey-page .journey-panel{
+    padding:18px 13px;
+  }
+  .journey-page .hotel-ratings{
+    gap:5px;
+  }
+  .journey-page .hotel-ratings span{
+    padding:9px;
+  }
+  .journey-page .journey-party .field-label{
+    font-size:10px;
+  }
+}
