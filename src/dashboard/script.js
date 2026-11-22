@@ -1,1 +1,40 @@
-const statusText=document.getElementById("authStatus");const welcome=document.getElementById("welcome");const logoutBtn=document.getElementById("logoutBtn");const signInBtn=document.getElementById("googleSignInBtn");const retryBtn=document.getElementById("retryBtn");const authError=new URLSearchParams(window.location.search).get("auth_error");const authMessages={cancelled:"Google sign-in was cancelled. You can try again whenever you are ready.",invalid:"Your Google sign-in expired or could not be verified. Please start again.",unavailable:"Google sign-in is temporarily unavailable. Please try again.",unverified:"Please use a Google account with a verified email address.",conflict:"This Google account conflicts with an existing account. Please contact support."};async function loadAccount(){retryBtn.hidden=true;statusText.textContent="Checking your account…";try{const user=await window.VirasatAuth.currentUser();logoutBtn.hidden=!user;signInBtn.hidden=Boolean(user);welcome.textContent=user?"Namaste, "+(user.name||"Traveler"):"A good day to go somewhere.";statusText.textContent=user?"You're signed in"+(user.email?" as "+user.email:"")+". Where to next?":authMessages[authError]||"Feel free to explore. Sign in whenever you're ready for an audio tour."}catch{statusText.textContent="Unable to connect. Check that the backend is running, then try again.";retryBtn.hidden=false}}signInBtn.addEventListener("click",async()=>{signInBtn.disabled=true;try{await window.VirasatAuth.signIn()}catch(error){statusText.textContent=error.message;signInBtn.disabled=false}});retryBtn.addEventListener("click",loadAccount);logoutBtn.addEventListener("click",async()=>{logoutBtn.disabled=true;try{await window.VirasatAuth.logout();window.location.assign("../landing-page/index.html")}catch{statusText.textContent="Sign out failed. Please try again.";logoutBtn.disabled=false}});loadAccount();const globalSearchForm=document.getElementById("globalSearchForm");const globalSearchInput=document.getElementById("globalSearchInput");if(globalSearchForm)globalSearchForm.addEventListener("submit",e=>{e.preventDefault();const query=globalSearchInput.value.trim();window.location.href="../ai-tour-planner/index.html"+(query?"?q="+encodeURIComponent(query):"")});async function fillFeaturedPlace(){const title=document.getElementById("hubPlaceTitle");const meta=document.getElementById("hubPlaceMeta");const image=document.getElementById("hubPhoto");const link=document.getElementById("hubPlaceLink");if(!title||!meta||!image||!link)return;try{const items=await window.VirasatAPI.monuments();const place=items.find(item=>item&&item.name&&item.image_url)||items.find(item=>item&&item.name);if(!place)return;title.textContent=place.name;meta.textContent=[place.city,place.location_tag].filter(Boolean).join(" · ")||"A place with a story to tell";if(typeof place.image_url==="string"&&place.image_url.startsWith("https://"))image.src=place.image_url;link.textContent="Hear its story ↗";link.href="../ai-tour-guide/index.html?id="+encodeURIComponent(place.id)}catch{}}if(typeof document!=="undefined")fillFeaturedPlace();
+const welcome = document.getElementById("welcome");
+const statusText = document.getElementById("authStatus");
+const search = document.getElementById("globalSearchForm");
+const searchInput = document.getElementById("globalSearchInput");
+
+function updateGreeting(user) {
+    if (!user) {
+        welcome.textContent = "Every journey starts somewhere.";
+        statusText.textContent = "Have a look around. Save the best stories for when you sign in.";
+        return;
+    }
+    const fullName = String(user.full_name || user.name || (user.username?.startsWith("google:") ? "" : user.username) || "traveler");
+    const firstName = fullName.trim().split(/\s+/)[0];
+    welcome.textContent = "What's calling you next, " + firstName + "?";
+    statusText.textContent = "Your places, stories and travel ideas are right here whenever you need them.";
+}
+document.addEventListener("virasat:account", event => updateGreeting(event.detail));
+if (window.VirasatSession) window.VirasatSession.ready.then(updateGreeting);
+search.addEventListener("submit", event => {
+    event.preventDefault();
+    const query = searchInput.value.trim();
+    window.location.href = "../ai-tour-planner/index.html" + (query ? "?q=" + encodeURIComponent(query) : "");
+});
+async function fillFeaturedPlace() {
+    const title = document.getElementById("hubPlaceTitle");
+    const meta = document.getElementById("hubPlaceMeta");
+    const image = document.getElementById("hubPhoto");
+    const link = document.getElementById("hubPlaceLink");
+    try {
+        const items = await window.VirasatAPI.monuments();
+        const place = items.find(item => item?.name && item?.image_url) || items.find(item => item?.name);
+        if (!place) return;
+        title.textContent = place.name;
+        meta.textContent = [place.city, place.location_tag].filter(Boolean).join(" · ");
+        if (typeof place.image_url === "string" && place.image_url.startsWith("https://")) image.src = place.image_url;
+        link.textContent = "Hear its story ↗";
+        link.href = "../ai-tour-guide/index.html?id=" + encodeURIComponent(place.id);
+    } catch {}
+}
+fillFeaturedPlace();
