@@ -481,3 +481,11 @@ img{display:block;max-width:100%}
 @media(max-width:950px){.journey-workspace{grid-template-columns:minmax(0,1fr) minmax(260px,.7fr);gap:14px}.journey-panel{padding:24px}.journey-intro{padding:26px 0}.journey-intro h1{font-size:clamp(44px,6.6vw,70px)}}
 @media(max-width:730px){.journey-workspace{grid-template-columns:1fr;gap:13px;margin:20px 0 43px}.journey-main{gap:13px}.journey-aside{position:static}.journey-intro-stamp{display:none}.journey-intro h1{font-size:clamp(43px,11vw,61px);margin:17px 0 12px}.journey-intro p{font-size:12px;max-width:420px}.journey-panel{padding:23px 19px;border-radius:20px}.journey-panel h2{font-size:29px}.journey-route{grid-template-columns:19px minmax(0,1fr) 28px;gap:8px}.journey-route-field{padding:12px;min-height:69px}.journey-swap{width:28px;height:30px}.journey-add-stop{padding-left:27px}.journey-two-cols{gap:10px}.travel-modes{gap:6px}.travel-mode input+span{padding:12px 3px;min-height:90px;border-radius:11px 11px 11px 3px}.travel-mode-icon{font-size:19px}.travel-mode strong{font-size:10px}.journey-action-row{align-items:stretch;flex-direction:column;gap:10px}.journey-action-row .journey-primary{width:100%;min-height:50px}.journey-availability{min-width:0}.journey-plan-panel{background:#e7eee4}.journey-footnote{padding:21px 10px}.profile-modal-content{padding:27px 23px}.profile-popover{right:-2px;top:calc(100% + 12px)}}
 @media(max-width:360px){.journey-panel{padding:21px 14px}.journey-two-cols{gap:7px}.journey-route-field input{font-size:12px}.travel-offer{gap:9px}.travel-offer-aside{max-width:119px;min-width:95px}.travel-offer-aside strong{font-size:14px}.hotel-ratings span{padding:9px 10px}}
+
+
+.auth-google-actions{grid-template-columns:1fr}
+.auth-google-actions .btn{width:100%;font-size:12px;min-height:46px}
+.journey-route-field,.route-stop-row{position:relative}
+.journey-suggestions{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:42;max-height:232px;overflow-y:auto;background:#fff;border:1px solid #d5e2d4;border-radius:13px;padding:5px;box-shadow:0 13px 35px rgba(33,67,43,.13)}
+.journey-suggestion{display:block;width:100%;text-align:left;border:0;background:transparent;border-radius:9px;padding:11px 12px;color:#345b43;font-size:12px;line-height:1.5}
+.journey-suggestion:hover,.journey-suggestion:focus-visible{background:#eaf2e7;outline:none}
