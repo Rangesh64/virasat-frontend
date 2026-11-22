@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../virasat.css">
 </head>
-<body>
+<body class="journey-page">
 <header class="site-header page-shell">
 <a href="../landing-page/index.html" class="brand" aria-label="Virasat home"><span class="brand-mark">V</span><span>virasat<span class="terra">.</span></span></a>
 <nav class="site-nav" aria-label="Main navigation">
@@ -59,10 +59,10 @@
 <div class="journey-rule"></div>
 <div class="journey-choice-heading"><h3>How would you like to travel?</h3><span>CHOOSE ONE</span></div>
 <div class="travel-modes" role="radiogroup" aria-label="Travel by">
-<label class="travel-mode"><input type="radio" name="travel_mode" value="car" checked><span class="travel-mode-icon" aria-hidden="true">▰</span><strong>Car</strong><small>Drive</small></label>
-<label class="travel-mode"><input type="radio" name="travel_mode" value="train"><span class="travel-mode-icon" aria-hidden="true">═</span><strong>Train</strong><small>Rail</small></label>
-<label class="travel-mode"><input type="radio" name="travel_mode" value="flight"><span class="travel-mode-icon" aria-hidden="true">✈</span><strong>Flight</strong><small>Air</small></label>
-<label class="travel-mode"><input type="radio" name="travel_mode" value="bus"><span class="travel-mode-icon" aria-hidden="true">▤</span><strong>Bus</strong><small>Coach</small></label>
+<label class="travel-mode"><input type="radio" name="travel_mode" value="car" checked><span class="travel-mode-content"><span class="travel-mode-icon" aria-hidden="true">▰</span><strong>Car</strong><small>Drive</small></span></label>
+<label class="travel-mode"><input type="radio" name="travel_mode" value="train"><span class="travel-mode-content"><span class="travel-mode-icon" aria-hidden="true">═</span><strong>Train</strong><small>Rail</small></span></label>
+<label class="travel-mode"><input type="radio" name="travel_mode" value="flight"><span class="travel-mode-content"><span class="travel-mode-icon" aria-hidden="true">✈</span><strong>Flight</strong><small>Air</small></span></label>
+<label class="travel-mode"><input type="radio" name="travel_mode" value="bus"><span class="travel-mode-content"><span class="travel-mode-icon" aria-hidden="true">▤</span><strong>Bus</strong><small>Coach</small></span></label>
 </div>
 <label class="journey-check"><input type="checkbox" id="compareAllModes"> <span>Compare all available transport types</span></label>
 <div id="transportError" class="inline-alert" role="alert" hidden></div>
