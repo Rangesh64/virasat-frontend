@@ -23,87 +23,96 @@
 <div class="header-actions"><a href="../dashboard/index.html" class="btn btn-outline btn-small">My space ↗</a></div>
 </header>
 <main class="page-shell">
-<section class="trip-intro">
-<div class="label">MAKE SOME ROOM FOR ADVENTURE</div>
-<h1 class="index-title">Let's make it<br><span class="terra">a trip to remember.</span></h1>
-<p class="body-copy">Tell us where you're going and what you enjoy. We'll find a way to fit the good stuff in.</p>
+<section class="journey-intro">
+<div>
+<div class="label">VIRASAT / YOUR NEXT JOURNEY</div>
+<h1>Good journeys<br>start <em>somewhere.</em></h1>
+<p>Tell us where you're headed. We'll help you find your way there, discover places worth stopping for, and make a plan around the things you love.</p>
+</div>
+<div class="journey-intro-stamp" aria-hidden="true"><span>GO FURTHER</span><span class="journey-stamp-arrow">↗</span><span>STAY CURIOUS</span></div>
 </section>
-<section class="trip-layout" aria-label="Trip planner">
-<div class="paper trip-form">
-<div class="kicker">YOUR NEXT JOURNEY</div>
-<h2>Where to?</h2>
-<form id="tripForm" novalidate>
-<div class="trip-fields">
-<div class="wide">
-<label class="field-label" for="destination">Where are we headed? *</label>
-<input class="field" id="destination" name="destination" maxlength="120" required placeholder="e.g. Jaipur" autocomplete="address-level2">
+<form id="tripForm" class="journey-workspace" novalidate>
+<div class="journey-main">
+<section class="journey-panel" aria-labelledby="routeTitle">
+<div class="journey-section-head"><span class="journey-step">01 / YOUR ROUTE</span><span class="journey-side-label">START HERE</span></div>
+<h2 id="routeTitle">Where to?</h2>
+<p class="journey-description">One city or several stops along the way. It's your trip.</p>
+<div class="journey-route">
+<div class="journey-route-rail" aria-hidden="true"><span class="rail-dot"></span><span class="rail-line"></span><span class="rail-end"></span></div>
+<div class="journey-route-fields">
+<label class="journey-route-field" for="origin"><span>LEAVING FROM</span><input id="origin" name="origin" type="text" maxlength="120" placeholder="City or country you're starting from" autocomplete="off"></label>
+<div id="routeStops" class="route-stops" aria-label="Intermediate destinations"></div>
+<label class="journey-route-field destination-field" for="destination"><span>GOING TO</span><input id="destination" name="destination" type="text" maxlength="120" required placeholder="Where would you like to go?" autocomplete="off"></label>
 </div>
-<div>
-<label class="field-label" for="days">How many days? *</label>
-<input class="field" id="days" name="days" type="number" min="1" max="7" step="1" value="2" required>
+<button id="swapRouteBtn" type="button" class="journey-swap" aria-label="Swap starting point and destination" title="Swap locations">⇅</button>
 </div>
-<div>
-<label class="field-label" for="travelers">How many travelers? *</label>
-<input class="field" id="travelers" name="travelers" type="number" min="1" max="20" step="1" value="2" required>
+<button id="addStopBtn" class="journey-add-stop" type="button"><span class="plus-circle">＋</span> Add a stop <span class="journey-add-note">Up to 6</span></button>
+<div class="journey-rule"></div>
+<div class="journey-two-cols">
+<div><label class="field-label" for="departureDate">Departure date</label><input id="departureDate" class="field" name="departure_date" type="date"></div>
+<div><label class="field-label" for="returnDate">Return date <span class="field-optional">optional</span></label><input id="returnDate" class="field" name="return_date" type="date"></div>
 </div>
-<div>
-<label class="field-label" for="city">City (optional)</label>
-<input class="field" id="city" name="city" maxlength="120" placeholder="e.g. Jaipur">
+<div class="journey-two-cols">
+<div><label class="field-label" for="travelers">Travelers</label><input id="travelers" class="field" type="number" min="1" max="20" value="2" step="1" required></div>
+<div><label class="field-label" for="days">Days away</label><input id="days" class="field" type="number" min="1" max="7" value="2" step="1" required></div>
 </div>
-<div>
-<label class="field-label" for="area">Area (optional)</label>
-<input class="field" id="area" name="area" maxlength="120" placeholder="e.g. Pink City">
+<div class="journey-rule"></div>
+<div class="journey-choice-heading"><h3>How would you like to travel?</h3><span>CHOOSE ONE</span></div>
+<div class="travel-modes" role="radiogroup" aria-label="Travel by">
+<label class="travel-mode"><input type="radio" name="travel_mode" value="car" checked><span class="travel-mode-icon" aria-hidden="true">▰</span><strong>Car</strong><small>Drive</small></label>
+<label class="travel-mode"><input type="radio" name="travel_mode" value="train"><span class="travel-mode-icon" aria-hidden="true">═</span><strong>Train</strong><small>Rail</small></label>
+<label class="travel-mode"><input type="radio" name="travel_mode" value="flight"><span class="travel-mode-icon" aria-hidden="true">✈</span><strong>Flight</strong><small>Air</small></label>
+<label class="travel-mode"><input type="radio" name="travel_mode" value="bus"><span class="travel-mode-icon" aria-hidden="true">▤</span><strong>Bus</strong><small>Coach</small></label>
 </div>
-<div class="wide">
-<label class="field-label" for="interests">What do you like?</label>
-<textarea class="field" id="interests" name="interests" maxlength="650" placeholder="Fort walks, quiet museums, local food, architecture" aria-describedby="interestsHelp"></textarea>
-<span id="interestsHelp" class="field-hint">Separate interests with commas. Up to eight.</span>
+<label class="journey-check"><input type="checkbox" id="compareAllModes"> <span>Compare all available transport types</span></label>
+<div id="transportError" class="inline-alert" role="alert" hidden></div>
+<div class="journey-action-row">
+<button id="transportSearchBtn" type="button" class="btn journey-primary">Find travel options <span aria-hidden="true">↗</span></button>
+<span id="transportStatus" class="journey-availability" aria-live="polite">Fares are shown only when a provider confirms them.</span>
 </div>
-<div class="wide">
-<label class="field-label" for="budget">Total trip budget for everyone (₹, optional)</label>
-<input class="field" id="budget" name="budget" type="number" min="0" max="100000000" step="1" placeholder="e.g. 8000">
+<div id="transportResults" class="journey-search-results" hidden><div class="journey-results-head"><h3>Ways to get there</h3><span id="transportResultCount"></span></div><div id="transportResultsList"></div><p id="transportWarnings" class="field-hint"></p></div>
+</section>
+<section class="journey-panel" aria-labelledby="stayTitle">
+<div class="journey-section-head"><span class="journey-step">02 / YOUR STAY</span><span class="journey-side-label">OPTIONAL</span></div>
+<h2 id="stayTitle">Stay somewhere lovely.</h2>
+<p class="journey-description">Find a place to rest after the exploring. Choose your comfort level, not somebody else's.</p>
+<fieldset class="hotel-ratings"><legend class="field-label">Hotel preference</legend>
+<label><input type="checkbox" name="star_rating" value="2"> <span>2 star</span></label>
+<label><input type="checkbox" name="star_rating" value="3" checked> <span>3 star</span></label>
+<label><input type="checkbox" name="star_rating" value="4" checked> <span>4 star</span></label>
+<label><input type="checkbox" name="star_rating" value="5"> <span>5 star</span></label>
+</fieldset>
+<div class="journey-two-cols"><div><label for="rooms" class="field-label">Rooms</label><input class="field" type="number" id="rooms" min="1" max="20" step="1" value="1"></div><div class="stay-caption"><span>YOUR DATES</span><strong id="stayDatesLabel">Select departure and return</strong></div></div>
+<div id="hotelError" class="inline-alert" role="alert" hidden></div>
+<button id="hotelSearchBtn" class="btn journey-secondary" type="button">Find places to stay <span aria-hidden="true">↗</span></button>
+<div id="hotelResults" class="journey-search-results" hidden><div class="journey-results-head"><h3>Places to stay</h3><span id="hotelResultCount"></span></div><div id="hotelResultsList"></div><p id="hotelWarnings" class="field-hint"></p></div>
+</section>
 </div>
-<details class="wide advanced-options">
-<summary>Have a specific location? <span aria-hidden="true">+</span></summary>
-<div class="trip-fields" style="margin-top:16px">
-<div><label class="field-label" for="latitude">Latitude</label><input class="field" id="latitude" type="number" min="-90" max="90" step="any" placeholder="27.1751"></div>
-<div><label class="field-label" for="longitude">Longitude</label><input class="field" id="longitude" type="number" min="-180" max="180" step="any" placeholder="78.0421"></div>
-</div>
-<p class="field-hint">Coordinates help with searches; exact travel distances aren't verified yet.</p>
-</details>
+<aside class="journey-aside">
+<section class="journey-panel journey-plan-panel" aria-labelledby="buildTitle">
+<div class="journey-section-head"><span class="journey-step">03 / MAKE IT YOURS</span></div>
+<h2 id="buildTitle">Now, the good part.</h2>
+<p class="journey-description">Tell us what matters to you, and we'll turn your destination into days worth remembering.</p>
+<div class="journey-aside-fields">
+<div><label for="interests" class="field-label">Things you love</label><textarea id="interests" class="field" maxlength="650" rows="3" placeholder="Old forts, architecture, street food, quiet corners…"></textarea><p class="field-hint">Separate with commas. Up to 8 interests.</p></div>
+<div><label for="budget" class="field-label">Total trip budget <span class="field-optional">optional</span></label><div class="budget-input-wrap"><span>₹</span><input id="budget" class="field" type="number" min="0" max="100000000" step="1" placeholder="Your total budget"></div><p class="field-hint">For everyone, across the entire trip.</p></div>
+<details class="advanced-options"><summary>More location details <span aria-hidden="true">+</span></summary>
+<div class="journey-advanced-fields">
+<label for="city" class="field-label">City</label><input id="city" class="field" maxlength="120" placeholder="Optional">
+<label for="area" class="field-label">Area</label><input id="area" class="field" maxlength="120" placeholder="Optional">
+<div class="journey-two-cols"><div><label for="latitude" class="field-label">Latitude</label><input id="latitude" class="field" type="number" step="any" min="-90" max="90" placeholder="27.1751"></div><div><label for="longitude" class="field-label">Longitude</label><input id="longitude" class="field" type="number" step="any" min="-180" max="180" placeholder="78.0421"></div></div>
+</div><p class="field-hint">Coordinates guide searches. Exact travel distances are not verified.</p></details>
 </div>
 <div id="planError" class="inline-alert" role="alert" hidden></div>
-<div id="planProgress" class="generation-progress" role="status" aria-live="polite" hidden>
-<span class="loader-ring" aria-hidden="true"></span>
-<div><strong>Putting your itinerary together…</strong><p>Research and planning can take a little while. Please keep this page open.</p></div>
-</div>
-<div class="trip-form-actions">
-<button id="generatePlanBtn" class="btn btn-terra" type="submit">Build my trip ↗</button>
-<a id="planSignInBtn" href="../landing-page/index.html?auth=1" class="btn btn-outline" hidden>Sign in to plan ↗</a>
-</div>
-<p class="field-hint">Costs are estimates, not quotes. Confirm timings and prices before traveling.</p>
-</form>
-</div>
-<div class="trip-right">
-<div id="planWelcome" class="paper trip-aside">
-<div class="label">GOOD DAYS, WELL SPENT</div>
-<h3>Less planning.<br>More being there.</h3>
-<p>Your plan will bring together historic places, suggested times, and a budget you can keep an eye on.</p>
-<ol class="steps"><li>Tell us where you're headed</li><li>Pick the things you love</li><li>Get a day-by-day itinerary</li><li>Take the PDF along</li></ol>
-</div>
-<div id="recentPlanPanel" class="paper-soft recent-plan" hidden>
-<div class="kicker">PICK UP WHERE YOU LEFT OFF</div>
-<h3>Your last itinerary</h3>
-<p>Open the plan you made earlier, without generating it again.</p>
-<button id="openRecentPlanBtn" class="btn btn-ink btn-small" type="button">Open saved plan ↗</button>
-</div>
-<div class="paper-soft" style="padding:27px">
-<div class="kicker">NOT READY TO PLAN?</div>
-<p class="trip-side-note">Just looking around? Find a place that catches your eye.</p>
-<a href="../ai-tour-planner/index.html" class="link-arrow">Explore monuments <span class="arrow">↗</span></a>
-</div>
-</div>
+<div id="planProgress" class="generation-progress" role="status" aria-live="polite" hidden><span class="loader-ring" aria-hidden="true"></span><div><strong>Putting your itinerary together…</strong><p>Research and planning can take a while. Keep this page open.</p></div></div>
+<button id="generatePlanBtn" class="btn journey-primary journey-build" type="submit">Build my itinerary <span aria-hidden="true">↗</span></button>
+<a id="planSignInBtn" href="../landing-page/index.html?auth=1" class="btn journey-secondary" hidden>Sign in to plan ↗</a>
+<p id="planCapabilityNote" class="journey-availability">An itinerary can be created from your destination and interests. Live fares and hotel availability depend on connected providers.</p>
 </section>
+<div id="recentPlanPanel" class="journey-recent" hidden><span class="journey-step">PICK UP WHERE YOU LEFT OFF</span><h3>Your last itinerary</h3><p>Open your saved plan without generating it again.</p><button id="openRecentPlanBtn" class="btn journey-secondary btn-small" type="button">Open saved plan ↗</button></div>
+<div class="journey-footnote"><span class="journey-step">A LITTLE REMINDER</span><p>Prices and journey times can change. Always double-check details with the provider before booking.</p></div>
+</aside>
+</form>
 <section id="planResults" class="plan-results" aria-label="Your itinerary" aria-live="polite" hidden>
 <div class="plan-topline"><div class="label">YOUR PERSONAL ITINERARY</div><span id="planCreated" class="count"></span></div>
 <div class="plan-title-row"><div><h2 id="planTitle" class="section-heading"></h2><p id="planSummary" class="body-copy"></p></div><button id="downloadPdfBtn" type="button" class="btn btn-ink">Download PDF ↗</button></div>
