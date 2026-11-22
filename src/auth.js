@@ -43,6 +43,39 @@
     }
 
     window.VirasatAuth = {
+        async continueGoogle() {
+            await googleReady();
+            let unified = false;
+            try {
+                const response = await fetch(apiBase + "/api/v1/travel/capabilities", { credentials: "include", cache: "no-store" });
+                if (response.ok) {
+                    const capabilities = await response.json();
+                    unified = capabilities.profile_onboarding === true;
+                }
+            } catch {}
+            window.localStorage?.removeItem("virasat_token");
+            window.location.assign(apiBase + (unified ? "/auth/google/continue" : "/auth/google/login"));
+        },
+        async updateProfile(data) {
+            const response = await fetch(apiBase + "/auth/profile", {
+                method: "PUT",
+                credentials: "include",
+                cache: "no-store",
+                headers: tokenHeaders({ "Content-Type": "application/json" }),
+                body: JSON.stringify(data)
+            });
+            if (!response.ok) {
+                let message = "We couldn\'t save your profile. Please try again.";
+                try {
+                    const details = await response.json();
+                    if (typeof details.detail === "string") message = details.detail;
+                } catch {}
+                const error = new Error(message);
+                error.status = response.status;
+                throw error;
+            }
+            return response.json();
+        },
         async signIn() {
             await googleReady();
             window.localStorage?.removeItem("virasat_token");
