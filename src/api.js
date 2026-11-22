@@ -145,6 +145,28 @@
                 ...(requestId ? { request_id: requestId } : {})
             });
         },
+        async capabilities() {
+            try {
+                return await json("/api/v1/travel/capabilities");
+            } catch (error) {
+                if (error.status === 404) return {
+                    transport_search: false,
+                    hotel_search: false,
+                    extended_planning: false,
+                    profile_onboarding: false
+                };
+                throw error;
+            }
+        },
+        transportSearch(input) {
+            return post("/api/v1/travel/transport/search", input);
+        },
+        hotelSearch(input) {
+            return post("/api/v1/travel/hotels/search", input);
+        },
+        async suggestPlaces(query) {
+            return json("/api/v1/travel/places/suggest?q=" + encodeURIComponent(query));
+        },
         createPlan(input) {
             return post("/api/v1/travel/plans", input);
         },
