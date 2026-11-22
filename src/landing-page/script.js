@@ -3,7 +3,6 @@ const openAuthBtn = document.getElementById("openAuthBtn");
 const closeAuthBtn = document.getElementById("closeAuthBtn");
 const backdrop = document.getElementById("authBackdrop");
 const googleBtn = document.getElementById("googleSignInBtn");
-const googleSignupBtn = document.getElementById("googleSignupBtn");
 const authError = document.getElementById("googleAuthError");
 const emailForm = document.getElementById("emailAuthForm");
 const emailButton = document.getElementById("emailAuthBtn");
@@ -38,18 +37,16 @@ function authMode(signup) {
     setAuthError("");
 }
 
-async function startGoogle(signup) {
-    const button = signup ? googleSignupBtn : googleBtn;
+async function startGoogle() {
     setAuthError("");
-    button.disabled = true;
-    button.textContent = "Opening Google…";
+    googleBtn.disabled = true;
+    googleBtn.textContent = "Opening Google…";
     try {
-        if (signup) await window.VirasatAuth.signUp();
-        else await window.VirasatAuth.signIn();
+        await window.VirasatAuth.continueGoogle();
     } catch (error) {
         setAuthError(error.message);
-        button.disabled = false;
-        button.textContent = signup ? "Google sign up ↗" : "Google sign in ↗";
+        googleBtn.disabled = false;
+        googleBtn.textContent = "Continue with Google ↗";
     }
 }
 
@@ -85,8 +82,7 @@ backdrop.addEventListener("click", () => toggleAuth(false));
 document.getElementById("browseGuestBtn").addEventListener("click", () => toggleAuth(false));
 loginTab.addEventListener("click", () => authMode(false));
 signupTab.addEventListener("click", () => authMode(true));
-googleBtn.addEventListener("click", () => startGoogle(false));
-googleSignupBtn.addEventListener("click", () => startGoogle(true));
+googleBtn.addEventListener("click", startGoogle);
 window.addEventListener("keydown", event => {
     if (event.key === "Escape" && authModal.classList.contains("is-open")) toggleAuth(false);
 });
@@ -96,9 +92,7 @@ if (query.get("auth_error") === "invalid") setAuthError("Your session has expire
 window.addEventListener("pageshow", event => {
     if (event.persisted) {
         googleBtn.disabled = false;
-        googleSignupBtn.disabled = false;
-        googleBtn.textContent = "Google sign in ↗";
-        googleSignupBtn.textContent = "Google sign up ↗";
+        googleBtn.textContent = "Continue with Google ↗";
     }
 });
 
