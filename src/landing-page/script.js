@@ -40,13 +40,13 @@ function authMode(signup) {
 async function startGoogle() {
     setAuthError("");
     googleBtn.disabled = true;
-    googleBtn.textContent = "Opening Google…";
+    googleBtn.querySelector(".google-button-label").textContent = "Connecting to Google…";
     try {
         await window.VirasatAuth.continueGoogle();
     } catch (error) {
         setAuthError(error.message);
         googleBtn.disabled = false;
-        googleBtn.textContent = "Continue with Google ↗";
+        googleBtn.querySelector(".google-button-label").textContent = "Continue with Google";
     }
 }
 
@@ -92,7 +92,7 @@ if (query.get("auth_error") === "invalid") setAuthError("Your session has expire
 window.addEventListener("pageshow", event => {
     if (event.persisted) {
         googleBtn.disabled = false;
-        googleBtn.textContent = "Continue with Google ↗";
+        googleBtn.querySelector(".google-button-label").textContent = "Continue with Google";
     }
 });
 
