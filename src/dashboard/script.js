@@ -5,14 +5,14 @@ const searchInput = document.getElementById("globalSearchInput");
 
 function updateGreeting(user) {
     if (!user) {
-        welcome.textContent = "Every journey starts somewhere.";
+        welcome.textContent = "Your places, all in one place.";
         statusText.textContent = "Have a look around. Save the best stories for when you sign in.";
         return;
     }
     const fullName = String(user.full_name || user.name || (user.username?.startsWith("google:") ? "" : user.username) || "traveler");
     const firstName = fullName.trim().split(/\s+/)[0];
-    welcome.textContent = "What's calling you next, " + firstName + "?";
-    statusText.textContent = "Your places, stories and travel ideas are right here whenever you need them.";
+    welcome.textContent = "Welcome back, " + firstName + "?";
+    statusText.textContent = "Search monuments, play an audio guide, or start planning your next trip.";
 }
 document.addEventListener("virasat:account", event => updateGreeting(event.detail));
 if (window.VirasatSession) window.VirasatSession.ready.then(updateGreeting);
