@@ -13,28 +13,28 @@
 </head>
 <body class="journey-page">
 <header class="site-header page-shell">
-<a href="../landing-page/index.html" class="brand" aria-label="Virasat home"><span class="brand-mark">V</span><span>virasat<span class="terra">.</span></span></a>
+<a href="../landing-page/index.html" class="brand" aria-label="Virasat home"><span class="brand-mark">V</span><span>virasat</span></a>
 <nav class="site-nav" aria-label="Main navigation">
 <a href="../landing-page/index.html">Home</a>
 <a href="../ai-tour-planner/index.html">Explore places</a>
 <a href="index.html" aria-current="page">Plan a trip</a>
 <a href="../ai-tour-guide/index.html">Audio guide</a>
 </nav>
-<div class="header-actions"><a href="../dashboard/index.html" class="btn btn-outline btn-small">My space ↗</a></div>
+<div class="header-actions"><a href="../dashboard/index.html" class="header-link session-profile-link">My space</a></div>
 </header>
 <main class="page-shell">
 <section class="journey-intro">
 <div>
-<div class="label">VIRASAT / YOUR NEXT JOURNEY</div>
-<h1>Good journeys<br>start <em>somewhere.</em></h1>
-<p>Tell us where you're headed. We'll help you find your way there, discover places worth stopping for, and make a plan around the things you love.</p>
+<div class="label">Trip planner</div>
+<h1>Plan the way <em>you travel.</em></h1>
+<p>Choose your route, compare available travel options, and build an itinerary around your interests.</p>
 </div>
-<div class="journey-intro-stamp" aria-hidden="true"><span>GO FURTHER</span><span class="journey-stamp-arrow">↗</span><span>STAY CURIOUS</span></div>
+
 </section>
 <form id="tripForm" class="journey-workspace" novalidate>
 <div class="journey-main">
 <section class="journey-panel" aria-labelledby="routeTitle">
-<div class="journey-section-head"><span class="journey-step">01 / YOUR ROUTE</span><span class="journey-side-label">START HERE</span></div>
+<div class="journey-section-head"><span class="journey-step">Your route</span><span class="journey-side-label">Travel details</span></div>
 <h2 id="routeTitle">Where to?</h2>
 <p class="journey-description">One city or several stops along the way. It's your trip.</p>
 <div class="journey-route">
@@ -44,9 +44,9 @@
 <div id="routeStops" class="route-stops" aria-label="Intermediate destinations"></div>
 <label class="journey-route-field destination-field" for="destination"><span>GOING TO</span><input id="destination" name="destination" type="text" maxlength="120" required placeholder="Where would you like to go?" autocomplete="off"></label>
 </div>
-<button id="swapRouteBtn" type="button" class="journey-swap" aria-label="Swap starting point and destination" title="Swap locations">⇅</button>
+<button id="swapRouteBtn" type="button" class="journey-swap" aria-label="Swap starting point and destination" title="Swap locations"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v18m-4-4 4 4 4-4M17 21V3m-4 4 4-4 4 4"/></svg></button>
 </div>
-<button id="addStopBtn" class="journey-add-stop" type="button"><span class="plus-circle">＋</span> Add a stop <span class="journey-add-note">Up to 6</span></button>
+<button id="addStopBtn" class="journey-add-stop" type="button"><span class="plus-circle" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span> Add a stop <span class="journey-add-note">Up to 6</span></button>
 <div class="journey-rule"></div>
 <div class="journey-two-cols">
 <div><label class="field-label" for="departureDate">Departure date</label><input id="departureDate" class="field" name="departure_date" type="date"></div>
@@ -57,12 +57,12 @@
 <div><label class="field-label" for="days">Days away</label><input id="days" class="field" type="number" min="1" max="7" value="2" step="1" required></div>
 </div>
 <div class="journey-rule"></div>
-<div class="journey-choice-heading"><h3>How would you like to travel?</h3><span>CHOOSE ONE</span></div>
+<div class="journey-choice-heading"><h3>How would you like to travel?</h3><span>Select a mode</span></div>
 <div class="travel-modes" role="radiogroup" aria-label="Travel by">
-<label class="travel-mode"><input type="radio" name="travel_mode" value="car" checked><span class="travel-mode-content"><span class="travel-mode-icon" aria-hidden="true">▰</span><strong>Car</strong><small>Drive</small></span></label>
-<label class="travel-mode"><input type="radio" name="travel_mode" value="train"><span class="travel-mode-content"><span class="travel-mode-icon" aria-hidden="true">═</span><strong>Train</strong><small>Rail</small></span></label>
-<label class="travel-mode"><input type="radio" name="travel_mode" value="flight"><span class="travel-mode-content"><span class="travel-mode-icon" aria-hidden="true">✈</span><strong>Flight</strong><small>Air</small></span></label>
-<label class="travel-mode"><input type="radio" name="travel_mode" value="bus"><span class="travel-mode-content"><span class="travel-mode-icon" aria-hidden="true">▤</span><strong>Bus</strong><small>Coach</small></span></label>
+<label class="travel-mode"><input type="radio" name="travel_mode" value="car" checked><span class="travel-mode-content"><span class="travel-mode-icon" aria-hidden="true"><svg viewBox="0 0 24 24" class="mode-svg" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9 7 4h10l2 5"/><rect x="3" y="9" width="18" height="10" rx="2"/><path d="M3 14h18M7 19v2M17 19v2"/><circle cx="7.5" cy="16.5" r=".7"/><circle cx="16.5" cy="16.5" r=".7"/></svg></span><strong>Car</strong><small>Drive</small></span></label>
+<label class="travel-mode"><input type="radio" name="travel_mode" value="train"><span class="travel-mode-content"><span class="travel-mode-icon" aria-hidden="true"><svg viewBox="0 0 24 24" class="mode-svg" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="18" rx="4"/><path d="M5 10h14M8 16h.01M16 16h.01M8 20l-2 2M16 20l2 2"/></svg></span><strong>Train</strong><small>Rail</small></span></label>
+<label class="travel-mode"><input type="radio" name="travel_mode" value="flight"><span class="travel-mode-content"><span class="travel-mode-icon" aria-hidden="true"><svg viewBox="0 0 24 24" class="mode-svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2c1.2 0 2 1.2 2 3v6l7 4v3l-7-2v4l2 1v1l-4-1-4 1v-1l2-1v-4l-7 2v-3l7-4V5c0-1.8.8-3 2-3Z"/></svg></span><strong>Flight</strong><small>Air</small></span></label>
+<label class="travel-mode"><input type="radio" name="travel_mode" value="bus"><span class="travel-mode-content"><span class="travel-mode-icon" aria-hidden="true"><svg viewBox="0 0 24 24" class="mode-svg" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="18" rx="3"/><path d="M4 10h16M8 15h.01M16 15h.01M7 20v2M17 20v2"/></svg></span><strong>Bus</strong><small>Coach</small></span></label>
 </div>
 <label class="journey-check"><input type="checkbox" id="compareAllModes"> <span>Compare all available transport types</span></label>
 <div id="transportError" class="inline-alert" role="alert" hidden></div>
@@ -73,8 +73,8 @@
 <div id="transportResults" class="journey-search-results" hidden><div class="journey-results-head"><h3>Ways to get there</h3><span id="transportResultCount"></span></div><div id="transportResultsList"></div><p id="transportWarnings" class="field-hint"></p></div>
 </section>
 <section class="journey-panel" aria-labelledby="stayTitle">
-<div class="journey-section-head"><span class="journey-step">02 / YOUR STAY</span><span class="journey-side-label">OPTIONAL</span></div>
-<h2 id="stayTitle">Stay somewhere lovely.</h2>
+<div class="journey-section-head"><span class="journey-step">Accommodation</span><span class="journey-side-label">OPTIONAL</span></div>
+<h2 id="stayTitle">Find somewhere to stay</h2>
 <p class="journey-description">Find a place to rest after the exploring. Choose your comfort level, not somebody else's.</p>
 <fieldset class="hotel-ratings"><legend class="field-label">Hotel preference</legend>
 <label><input type="checkbox" name="star_rating" value="2"> <span>2 star</span></label>
@@ -90,9 +90,9 @@
 </div>
 <aside class="journey-aside">
 <section class="journey-panel journey-plan-panel" aria-labelledby="buildTitle">
-<div class="journey-section-head"><span class="journey-step">03 / MAKE IT YOURS</span></div>
-<h2 id="buildTitle">Now, the good part.</h2>
-<p class="journey-description">Tell us what matters to you, and we'll turn your destination into days worth remembering.</p>
+<div class="journey-section-head"><span class="journey-step">Your itinerary</span></div>
+<h2 id="buildTitle">Build your itinerary</h2>
+<p class="journey-description">Choose your interests and budget. Your itinerary brings the stops together.</p>
 <div class="journey-aside-fields">
 <div><label for="interests" class="field-label">Things you love</label><textarea id="interests" class="field" maxlength="650" rows="3" placeholder="Old forts, architecture, street food, quiet corners…"></textarea><p class="field-hint">Separate with commas. Up to 8 interests.</p></div>
 <div><label for="budget" class="field-label">Total trip budget <span class="field-optional">optional</span></label><div class="budget-input-wrap"><span>₹</span><input id="budget" class="field" type="number" min="0" max="100000000" step="1" placeholder="Your total budget"></div><p class="field-hint">For everyone, across the entire trip.</p></div>
@@ -109,8 +109,8 @@
 <a id="planSignInBtn" href="../landing-page/index.html?auth=1" class="btn journey-secondary" hidden>Sign in to plan ↗</a>
 <p id="planCapabilityNote" class="journey-availability">An itinerary can be created from your destination and interests. Live fares and hotel availability depend on connected providers.</p>
 </section>
-<div id="recentPlanPanel" class="journey-recent" hidden><span class="journey-step">PICK UP WHERE YOU LEFT OFF</span><h3>Your last itinerary</h3><p>Open your saved plan without generating it again.</p><button id="openRecentPlanBtn" class="btn journey-secondary btn-small" type="button">Open saved plan ↗</button></div>
-<div class="journey-footnote"><span class="journey-step">A LITTLE REMINDER</span><p>Prices and journey times can change. Always double-check details with the provider before booking.</p></div>
+<div id="recentPlanPanel" class="journey-recent" hidden><span class="journey-step">Saved plan</span><h3>Your last itinerary</h3><p>Open your saved plan without generating it again.</p><button id="openRecentPlanBtn" class="btn journey-secondary btn-small" type="button">Open saved plan ↗</button></div>
+<div class="journey-footnote"><span class="journey-step">Before booking</span><p>Prices and journey times can change. Always double-check details with the provider before booking.</p></div>
 </aside>
 </form>
 <section id="planResults" class="plan-results" aria-label="Your itinerary" aria-live="polite" hidden>
@@ -123,7 +123,7 @@
 <p class="field-hint" style="margin:18px 0 38px">Prices, opening hours and travel routes are estimates. Always confirm with local sources.</p>
 </section>
 </main>
-<footer class="page-shell site-footer"><div>Virasat · A different way to see India.</div><span>GO SLOW. LOOK CLOSER.</span></footer>
+<footer class="page-shell site-footer"><div>Virasat · Discover the places that shaped us.</div><span>Heritage, on your terms.</span></footer>
 <nav class="bottom-nav" aria-label="Mobile navigation">
 <a href="../landing-page/index.html"><span class="nav-icon">⌂</span>Home</a>
 <a href="../ai-tour-planner/index.html"><span class="nav-icon">⌕</span>Explore</a>
@@ -132,6 +132,6 @@
 </nav>
 <script src="../config.js"></script>
 <script src="../auth.js"></script><script src="../api.js"></script>
-<script src="script.js"></script><script src="../session-ui.js"></script>
+<script src="script.js"></script><script src="../session-ui.js"></script><script src="../iconography.js"></script>
 </body>
 </html>
