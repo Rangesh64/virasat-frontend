@@ -464,3 +464,130 @@ body:before{opacity:.14}
     font-size:10px;
   }
 }
+
+
+.credential-dialog{
+  position:fixed;
+  inset:0;
+  z-index:105;
+  display:grid;
+  place-items:center;
+  padding:18px;
+}
+.credential-dialog[hidden]{display:none!important}
+.credential-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(20,47,31,.53);
+  backdrop-filter:blur(8px);
+}
+.credential-card{
+  position:relative;
+  width:min(465px,100%);
+  max-height:calc(100dvh - 36px);
+  overflow-y:auto;
+  padding:35px;
+  border:1px solid #dee8db;
+  border-radius:23px;
+  background:#fcfdf9;
+  box-shadow:0 25px 80px rgba(23,50,35,.24);
+}
+.credential-dialog-open{overflow:hidden}
+.credential-close{
+  position:absolute;
+  top:16px;
+  right:16px;
+  width:36px;
+  height:36px;
+  border:0;
+  border-radius:50%;
+  background:#e9efe6;
+  color:#375d43;
+  font-size:22px;
+}
+.credential-eyebrow{
+  font-size:12px;
+  font-weight:700;
+  color:#5c856b;
+}
+.credential-card h2{
+  font-size:clamp(27px,5vw,35px);
+  font-weight:750;
+  line-height:1.2;
+  letter-spacing:-.025em;
+  margin:14px 0 12px;
+  max-width:330px;
+}
+.credential-description{
+  color:#607869;
+  font-size:13px;
+  line-height:1.75;
+  margin:0 0 23px;
+}
+.credential-card form{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+.credential-card .field-label{
+  color:#304d3b;
+  margin:0 0 9px;
+  font-size:12px;
+  font-weight:700;
+}
+.credential-card .field{
+  width:100%;
+  min-width:0;
+  min-height:49px;
+  font-size:16px;
+  margin:0 0 17px;
+  background:#fff;
+}
+.credential-card .credential-hint{
+  font-size:11px;
+  color:#7c9080;
+  line-height:1.55;
+  margin:-9px 0 18px;
+}
+.credential-error{
+  padding:12px;
+  margin:2px 0 14px;
+  border-radius:11px;
+  background:#fff2ed;
+  border:1px solid #eacfc7;
+  font-size:12px;
+  color:#864e40;
+  line-height:1.6;
+  overflow-wrap:anywhere;
+}
+.credential-submit{
+  width:100%;
+  min-height:50px;
+  background:#355d43;
+  color:#fff;
+  font-size:13px;
+  margin-top:3px;
+}
+.credential-submit:hover:not(:disabled){background:#2d503a}
+.credential-later{
+  display:block;
+  border:0;
+  background:transparent;
+  color:#668071;
+  font-size:12px;
+  font-weight:600;
+  margin:13px auto 0;
+  padding:10px;
+  text-align:center;
+}
+.credential-later:hover{text-decoration:underline}
+@media(max-width:460px){
+  .credential-dialog{padding:12px}
+  .credential-card{
+    padding:29px 21px;
+    border-radius:18px;
+    max-height:calc(100dvh - 24px);
+  }
+  .credential-card h2{font-size:29px;line-height:1.18}
+  .credential-close{top:12px;right:12px}
+}
