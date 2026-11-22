@@ -14,7 +14,7 @@
         if (value !== undefined) element.textContent = String(value);
         return element;
     };
-    const nameOf = account => account?.full_name || account?.name || (account?.username?.startsWith("google:") ? account?.email : account?.username) || "Traveler";
+    const nameOf = account => account?.full_name || account?.name || account?.login_username || account?.email || (account?.credentials_set === undefined && !account?.username?.startsWith("google:") ? account?.username : null) || "Traveler";
     const dateLabel = value => {
         if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))) return "Not added";
         const valueDate = new Date(value + "T00:00:00");
@@ -50,9 +50,12 @@
     }
     const edit = make("button", "profile-manage", "Edit profile ↗");
     edit.type = "button";
+    const credentials = make("button", "profile-manage", "Set up username and password");
+    credentials.type = "button";
+    credentials.hidden = true;
     const logout = make("button", "profile-sign-out", "Sign out");
     logout.type = "button";
-    menu.append(menuHeader, detail, edit, logout);
+    menu.append(menuHeader, detail, edit, credentials, logout);
     wrapper.append(toggle, menu);
     actions.appendChild(wrapper);
 
@@ -91,7 +94,8 @@
     function fillMenu() {
         if (!user) return;
         name.textContent = nameOf(user);
-        detail.querySelector('[data-profile-field="username"] dd').textContent = user.username?.startsWith("google:") ? (user.email || "Google account") : (user.username || "Member");
+        detail.querySelector('[data-profile-field="username"] dd').textContent = user.login_username || (user.credentials_set === undefined && !user.username?.startsWith("google:") ? user.username : null) || "Not set";
+        credentials.hidden = !(user.google_sub && user.credentials_set === false);
         detail.querySelector('[data-profile-field="dob"] dd').textContent = dateLabel(user.date_of_birth);
         detail.querySelector('[data-profile-field="gender"] dd').textContent = genderLabel(user.gender);
         toggle.title = nameOf(user);
@@ -105,7 +109,7 @@
         modal.hidden = !open;
         document.body.classList.toggle("profile-editor-open", open);
         if (open) {
-            $("profileFullName").value = user?.full_name || user?.name || (user?.username?.startsWith("google:") ? "" : user?.username) || "";
+            $("profileFullName").value = user?.full_name || user?.name || "";
             $("profileDob").value = user?.date_of_birth || "";
             const today = new Date();
             $("profileDob").max = [today.getFullYear(), String(today.getMonth() + 1).padStart(2, "0"), String(today.getDate()).padStart(2, "0")].join("-");
@@ -116,6 +120,7 @@
     }
     toggle.addEventListener("click", () => showMenu(menu.hidden));
     edit.addEventListener("click", () => { showMenu(false); editor(true); });
+    credentials.addEventListener("click", () => { showMenu(false); window.VirasatCredentialSetup?.open(); });
     $("profileClose").addEventListener("click", () => editor(false));
     modal.querySelector(".profile-modal-backdrop").addEventListener("click", () => editor(false));
     document.addEventListener("click", event => { if (!wrapper.contains(event.target)) showMenu(false); });
@@ -196,7 +201,7 @@
             const button = actions.querySelector("#" + id);
             if (button) button.hidden = true;
         }
-        if (account.onboarding_completed === false) editor(true);
+        if (account.onboarding_completed === false && !(account.google_sub && account.credentials_set === false)) editor(true);
     }
     async function refresh() {
         try {
