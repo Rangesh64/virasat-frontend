@@ -33,6 +33,8 @@ function authMode(signup) {
     signupTab.setAttribute("aria-pressed", String(signup));
     emailButton.textContent = signup ? "Create account ↗" : "Sign in ↗";
     passwordInput.autocomplete = signup ? "new-password" : "current-password";
+    usernameInput.maxLength = signup ? 32 : 100;
+    passwordInput.maxLength = signup ? 128 : 256;
     document.getElementById("passwordHint").hidden = !signup;
     setAuthError("");
 }
@@ -59,8 +61,12 @@ emailForm.addEventListener("submit", async event => {
         setAuthError("Use a username without spaces.");
         return;
     }
-    if (signupMode && password.length < 8) {
-        setAuthError("Choose a password of at least 8 characters.");
+    if (signupMode && !/^[A-Za-z0-9._-]{3,32}$/.test(username)) {
+        setAuthError("Choose a username with 3–32 letters, numbers, dots, underscores or hyphens.");
+        return;
+    }
+    if (signupMode && (password.length < 8 || password.length > 128)) {
+        setAuthError("Choose a password between 8 and 128 characters.");
         return;
     }
     emailButton.disabled = true;
