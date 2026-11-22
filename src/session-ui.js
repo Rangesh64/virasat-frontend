@@ -2,6 +2,8 @@
     const auth = window.VirasatAuth;
     const actions = document.querySelector(".site-header .header-actions");
     if (!auth || !actions) return;
+    const initialLogin = actions.querySelector("#openAuthBtn, #googleSignInBtn");
+    if (initialLogin) initialLogin.hidden = true;
     let user = null;
     let resolveReady;
     const ready = new Promise(resolve => { resolveReady = resolve; });
