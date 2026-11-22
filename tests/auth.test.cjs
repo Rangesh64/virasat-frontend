@@ -37,16 +37,18 @@ test("legacy Google sign-in remains available to existing users", async () => {
     assert.equal(calls[1], "http://127.0.0.1:8000/auth/google/login");
 });
 
-test("unified Google button redirects to continue route when backend advertises onboarding", async () => {
-    const { auth, calls } = harness(url => ok(url.endsWith("/status") ? { configured: true } : { profile_onboarding: true }));
+test("unified Google sign-in uses continue without a travel capability gate", async () => {
+    const { auth, calls } = harness(() => ok({ configured: true }));
     await auth.continueGoogle();
-    assert.equal(calls[2], "http://127.0.0.1:8000/auth/google/continue");
+    assert.equal(calls.length, 2);
+    assert.equal(calls[0].url, "http://127.0.0.1:8000/auth/google/status");
+    assert.equal(calls[1], "http://127.0.0.1:8000/auth/google/continue");
 });
 
-test("unified Google button falls back to legacy sign-in until backend is updated", async () => {
-    const { auth, calls } = harness(url => url.includes("/capabilities") ? fail(404) : ok({ configured: true }));
-    await auth.continueGoogle();
-    assert.equal(calls[2], "http://127.0.0.1:8000/auth/google/login");
+test("unified Google sign-in preserves backend setup failure without redirect", async () => {
+    const { auth, calls } = harness(() => ok({ configured: false, message: "Google is not configured." }));
+    await assert.rejects(auth.continueGoogle(), /not configured/);
+    assert.equal(calls.length, 1);
 });
 
 test("auth requests send credentials and bypass browser caches", async () => {
