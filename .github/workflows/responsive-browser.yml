@@ -1,0 +1,21 @@
+name: Responsive browser checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  responsive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save @playwright/test@1.56.1
+      - run: npx playwright install --with-deps chromium
+      - name: Check mobile and desktop viewport layouts
+        run: |
+          python3 -m http.server 5173 --bind 127.0.0.1 >/tmp/virasat-test-http.log 2>&1 &
+          npx playwright test tests/responsive.spec.cjs --reporter=line --workers=2
