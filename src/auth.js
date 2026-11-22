@@ -56,6 +56,30 @@
             window.localStorage?.removeItem("virasat_token");
             window.location.assign(apiBase + (unified ? "/auth/google/continue" : "/auth/google/login"));
         },
+        async setCredentials(username, password) {
+            const response = await fetch(apiBase + "/auth/credentials", {
+                method: "PUT",
+                credentials: "include",
+                cache: "no-store",
+                headers: tokenHeaders({ "Content-Type": "application/json" }),
+                body: JSON.stringify({ username, password })
+            });
+            if (!response.ok) {
+                let message = response.status === 409
+                    ? "This username is already taken, or login credentials are already set for this account."
+                    : response.status === 401
+                        ? "Your session has expired. Sign in with Google again."
+                        : "Couldn't save your sign-in details. Please try again.";
+                try {
+                    const details = await response.json();
+                    if (typeof details.detail === "string" && details.detail.trim()) message = details.detail;
+                } catch {}
+                const error = new Error(message);
+                error.status = response.status;
+                throw error;
+            }
+            return response.json();
+        },
         async updateProfile(data) {
             const response = await fetch(apiBase + "/auth/profile", {
                 method: "PUT",
