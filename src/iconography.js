@@ -8,8 +8,8 @@
     document.querySelectorAll(".bottom-nav a").forEach(link => {
         const span = link.querySelector(".nav-icon");
         if (!span) return;
-        const href = link.getAttribute("href") || "";
-        const key = href.includes("landing-page") ? "home" : href.includes("ai-tour-planner") ? "explore" : href.includes("trip-planner") ? "plan" : "profile";
+        const label = (link.textContent || "").trim().toLowerCase();
+        const key = label.includes("home") ? "home" : label.includes("explore") ? "explore" : label.includes("plan") ? "plan" : "profile";
         span.innerHTML = '<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + paths[key] + "</svg>";
     });
 })();
