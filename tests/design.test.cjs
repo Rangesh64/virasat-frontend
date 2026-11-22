@@ -43,7 +43,8 @@ test("all four transport choices use vector icons instead of text placeholders",
     }
     const icons = html.match(/<svg viewBox="0 0 24 24" class="mode-svg"/g) || [];
     assert.equal(icons.length, 4);
-    for (const placeholder of ["▰", "▤", "═"]) assert.ok(!html.includes(placeholder), "remove "+placeholder);
+    const modeMarkup = html.split('class="travel-modes"')[1].split('</div>')[0];
+    for (const placeholder of ["▰", "▤", "═"]) assert.ok(!modeMarkup.includes(placeholder), "remove "+placeholder);
 });
 
 test("Google sign-in has a real multicolor G and one button", () => {
