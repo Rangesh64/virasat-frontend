@@ -171,6 +171,8 @@
 
     function guest() {
         wrapper.hidden = true;
+        const memberLink = actions.querySelector(".session-profile-link");
+        if (memberLink) memberLink.hidden = false;
         const login = actions.querySelector("#openAuthBtn, #googleSignInBtn");
         if (login) login.hidden = false;
         if (!login) {
@@ -186,6 +188,8 @@
     }
     function signed(account) {
         user = account;
+        const memberLink = actions.querySelector(".session-profile-link");
+        if (memberLink) memberLink.hidden = true;
         wrapper.hidden = false;
         fillMenu();
         for (const id of ["openAuthBtn", "googleSignInBtn", "logoutBtn", "sessionGuestLink"]) {
