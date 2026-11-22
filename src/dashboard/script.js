@@ -10,7 +10,7 @@ function updateGreeting(user) {
         return;
     }
     const fullName = String(user.full_name || user.name || (user.username?.startsWith("google:") ? "" : user.username) || "traveler");
-    const firstName = fullName.trim().split(/\\s+/)[0];
+    const firstName = fullName.trim().split(/\s+/)[0];
     welcome.textContent = "Welcome back, " + firstName + ".";
     statusText.textContent = "Search monuments, play an audio guide, or start planning your next trip.";
 }
