@@ -310,3 +310,31 @@ body:before{opacity:.14}
 @media(prefers-reduced-motion:reduce){
   .page-home .pathway,.page-discover .place-card,.journey-page .travel-mode input+span{transition:none}
 }
+
+
+.brand-mark:after{display:none}
+@media(max-width:780px){
+  body{padding-bottom:83px}
+  .site-nav{display:none}
+  .site-header{min-height:72px}
+  .header-link{display:none}
+  .bottom-nav{
+    position:fixed;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    gap:4px;
+    bottom:12px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(440px,calc(100% - 28px));
+    min-height:61px;
+    z-index:50;
+    padding:7px;
+    border-radius:19px;
+    box-shadow:0 10px 30px rgba(31,67,39,.11);
+    backdrop-filter:blur(18px);
+  }
+  .bottom-nav a{min-width:62px;display:flex;flex-direction:column;align-items:center;gap:4px;color:#6c8774;font-size:9px;font-weight:700}
+  .bottom-nav a[aria-current=page]{color:#315e42}
+}
